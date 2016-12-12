@@ -1,4 +1,4 @@
-# Kii CP Demo project framework
+# Kii CP Demo project
 
 ## Prerequisite
 ##### Install required tools `gulp` and `bower`:
