@@ -4335,3 +4335,23 @@ padding: 6px 10px;
 .st-blue {
   background-color: #23b7e5;
 }
+
+.modal-dialog{
+  .modal-content{
+    border: none;
+    border-radius: 20px;
+    .fa.fa-times {
+        position: absolute;
+        top: -28px;
+        right: -23px;
+        color: #ff7c73;
+        font-size: 36px;
+        cursor: pointer;
+    }
+    .modal-header{
+      border-radius: 20px 20px 0px 0px;
+      background: #61c9d2;
+      color: #fff;
+    }
+  }
+}
