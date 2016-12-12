@@ -4,9 +4,7 @@ var MyApp = angular.module('SmartPortal', ['ui.router',
     'SmartPortal.Secure', 'SmartPortal.AppShared', 'SmartPortal.Portal',
     'pascalprecht.translate'
 ]);
-MyApp
-
-    .constant('AUTH_EVENTS', {
+MyApp.constant('AUTH_EVENTS', {
     tokenNotGiven: 'token-not-given',
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
@@ -25,7 +23,7 @@ MyApp
         .useSanitizeValueStrategy('escapeParameters')
         .translations('en', window.translations.en)
         .translations('cn', window.translations.cn)
-        .preferredLanguage('cn');
+        .preferredLanguage('en');
 
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     $httpProvider.defaults.headers.common['Authorization'] = 'Bearer super_token';

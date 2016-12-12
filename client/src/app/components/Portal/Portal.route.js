@@ -7,9 +7,8 @@ angular.module('SmartPortal.Portal')
         .state('app.portal.MonitorManager', {
             url: '/Monitoring',
             templateUrl: 'app/components/Portal/MonitorManager/MonitorManager.html',
-            redirectTo: 'app.portal.MonitorManager.View',
-            stateName: 'monitorManager',
-            // abstract: true
+            redirectTo: 'app.portal.MonitorManager.Monitoring',
+            stateName: 'monitorManager'
         })
         .state('app.portal.Welcome', {
             url: '/Welcome',

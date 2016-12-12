@@ -24,7 +24,7 @@
             "deleteChannelMsg": "Sure to delete this Channel?",
             "deviceNumber": "Device number",
             "monitoring": {
-                "title": "Monitoring"
+                "title": "Status"
             },
             "save": "Save"
         },
@@ -50,12 +50,12 @@
                 }
             },
             "monitorManager": {
-                "displayName": "Thing Monitoring",
+                "displayName": "Device Monitoring",
                 "history": {
                     "displayName": "Alert History"
                 },
-                "realtime": {
-                    "displayName": "Real Time Monitoring"
+                "monitoring": {
+                    "displayName": "Device Monitoring"
                 },
                 "monitorView": {
                     "displayName": "Monitoring Views",

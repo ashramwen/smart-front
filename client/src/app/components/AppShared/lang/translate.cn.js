@@ -54,7 +54,7 @@
                 history: {
                     "displayName": "监控记录"
                 },
-                "realtime": {
+                "monitoring": {
                     "displayName": "实时监控"
                 },
                 "monitorView": {
