@@ -1,0 +1,54 @@
+<div class="app-portal-monitormanager-viewmanager" ng-init="init()">
+  <div class="container-fluid" ng-if="views">
+
+    <!-- 频道信息 -->
+    <div class="row">
+      <div class="col-md-12">
+        <section class="panel">
+          <div class="panel-body">
+            <div class="sub-title">{{'monitorManager.channel.info' | translate}}</div>
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label for="inputViewName" class="col-sm-1 control-label">{{'monitorManager.channel.name' | translate}}</label>
+                <div class="col-sm-11">
+                  <input type="text" class="form-control" id="inputViewName" ng-model="view.name" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputViewDesc" class="col-sm-1 control-label">{{'monitorManager.channel.desc' | translate}}</label>
+                <div class="col-sm-11">
+                  <textarea class="form-control" id="inputViewDesc" rows="10" maxlength="100" ng-model="view.desc"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- END 频道信息 -->
+
+    <!-- 添加监控设备 -->
+    <div class="row">
+      <div class="col-md-12">
+        <section class="sub-title">{{'monitorManager.channel.selectDevice' | translate}}</section>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <section class="panel">
+          <div class="panel-body">
+            <thing-location-selector ng-detail="view.detail"></thing-location-selector>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- END 添加监控设备 -->
+
+    <div class="bottom-btn">
+      <button class="btn btn-warning bg-yellow-gradient" ng-click="newView()" ng-if="new">{{'monitorManager.channel.create' | translate}}</button>
+      <button class="btn btn-warning bg-yellow-gradient" ng-click="modifyView()" ng-if="!new">{{'monitorManager.channel.update' | translate}}</button>
+      <button class="btn btn-primary" ng-click="goBack()">{{'monitorManager.channel.goBack' | translate}}</button>
+    </div>
+  </div>
+</div>
