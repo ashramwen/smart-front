@@ -42,7 +42,7 @@ angular.module('SmartPortal.AppShared')
                 if(!$scope.period || !$scope.query) return;
                 if($scope._perviousQuery != $scope.query){
                     var _query = $scope.query;
-                    if(!_.isString($scope.query)){
+                    if(!($scope.query instanceof String)){
                         _query = JSON.stringify(_query);
                     }
 

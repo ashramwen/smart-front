@@ -76,6 +76,7 @@ MyApp.constant('AUTH_EVENTS', {
             });
 
             window.ECharts = echarts;
+            _.noConflict();
 
             KiiReporting.KiiQueryConfig.setConfig({
                 token: 'Bearer super_token',

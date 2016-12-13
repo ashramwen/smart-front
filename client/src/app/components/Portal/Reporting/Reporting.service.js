@@ -9,7 +9,7 @@ angular.module('SmartPortal.Portal')
       refresh: function(){
         var $defer = $q.defer();
 
-        CustomChartsService.charts = _.map(window.chartsMeta, function(chartData){
+        CustomChartsService.charts = window.chartsMeta.map(function(chartData){
           return new CustomChart(chartData.dataset);
         });
 
@@ -28,7 +28,7 @@ angular.module('SmartPortal.Portal')
     };
 
     function CustomChart(data){
-      _.extend(this, {
+      Object.assign(this, {
         id: '',
         name: '',
         description: '',
@@ -53,7 +53,7 @@ angular.module('SmartPortal.Portal')
       });
 
       if(data){
-        _.extend(this, data);
+        Object.assign(this, data);
       }
 
       this.period = new KiiReporting.KiiTimePeriod(null);
@@ -105,7 +105,7 @@ angular.module('SmartPortal.Portal')
     CustomChart.factory = function(data){
       var _data = {name: '新建图表'};
       if(data){
-        _.extend(_data, data);
+        Object.assign(_data, data);
       }
       return new CustomChart(_data);
     };
