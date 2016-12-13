@@ -3,22 +3,29 @@
     <div class="row header">
       <div class="title pull-left">{{'monitorManager.monitoring.title' | translate}}</div>
       <div class="func-group pull-right">
-        <button class="btn btn-link edit" ng-click="set()">
-          <i class="fa fa-bell" aria-hidden="true"></i> {{'monitorManager.alert.set' | translate}}
+        <button class="btn btn-monitor" ng-click="set()">
+          <img src="images/icon_set.png" width="20" height="19" alt=""> {{'monitorManager.alert.set' | translate}}
         </button>
-        <a class="btn btn-link history" ui-sref="^.History({ id: view.id })">
-          <i class="fa fa-history" aria-hidden="true"></i> {{'monitorManager.alert.history' | translate}}
-        </a>
+        <button class="btn btn-monitor">
+          <img src="images/icon_history.png" width="28" height="19" alt=""> {{'monitorManager.alert.history' | translate}}
+        </button>
       </div>
     </div>
 
-    <div class="card-columns clearfix">
+    <div class="row card-columns clearfix">
 
       <!-- START card -->
-      <div class="card" ng-repeat="s in thing.status track by s.name">
-        <div class="head">{{s.display}} / {{s.unit}}</div>
+      <div class="card" ng-repeat="s in thing.status track by s.name" ng-class="{'warn':$index===3}">
+        <div class="head">
+          <div class="status"></div>
+          <div class="attribute"><span>{{s.display}} / {{s.unit}}</span></div>
+        </div>
         <div class="body">{{s.value}}</div>
-        <div class="foot">{{s.min}}≤ ≥{{s.max}}</div>
+        <div class="foot">
+          <div class="icon lower pull-left">{{s.min}}</div>
+          <div class="foot-line pull-left"></div>
+          <div class="icon upper pull-right">{{s.max}}</div>
+        </div>
       </div>
       <!-- END card -->
 
@@ -34,6 +41,9 @@
       <h3 class="modal-title">{{'monitorManager.alert.set' | translate}}</h3>
     </div>
     <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-warning btn-lg pull-center" ng-click="close()">{{'controls.create' | translate}}</button>
     </div>
   </div>
 </script>

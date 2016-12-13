@@ -1,6 +1,27 @@
 (function(win) {
     win.translations = win.translations || {};
     win.translations.cn = {
+        "controls": {
+            "refresh": "刷新",
+            "create": "创建",
+            "submit": "提交",
+            "finish": "完成",
+            "cancel": "取消",
+            "yes": "是",
+            "no": "否",
+            "add": "添加",
+            "delete": "删除",
+            "edit": "编辑",
+            "ok": "确定",
+            "selectAll": "全选",
+            "view": "查看",
+            "search": "搜索",
+            "operate": "操作",
+            "selectedList": "已选列表",
+            "selectDefault": "请选择",
+            "save": "保存",
+            "back": "返回"
+        },
         "monitorManager": {
             "addChannel": "添加监控频道",
             "alert": {

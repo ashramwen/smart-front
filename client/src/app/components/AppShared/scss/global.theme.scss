@@ -3065,7 +3065,7 @@ vertical-align: top;
 }
 /* skin-black sidebar */
 .skin-black .sidebar {
-  border-bottom: 1px solid #39435C;
+  // border-bottom: 1px solid #39435C;
 }
 .skin-black .sidebar > .sidebar-menu li {
   /*border-top: 1px solid #333;
@@ -3079,10 +3079,10 @@ vertical-align: top;
   }
 }
 .skin-black .sidebar > .sidebar-menu li:first-of-type {
-  border-top: 1px solid #444;
+  // border-top: 1px solid #444;
 }
 .skin-black .sidebar > .sidebar-menu li:first-of-type > a {
-  border-top: 0px solid #333;
+  // border-top: 0px solid #333;
 }
 .skin-black .sidebar > .sidebar-menu li > a {
   margin-right: 1px;
@@ -3098,7 +3098,9 @@ vertical-align: top;
   background: #35404d;
 }
 .skin-black .left-side {
-  background: #39435C;
+  // background: #39435C;
+  background: rgba(64, 181, 198, .749);
+  border-right: 1px solid rgba(163, 216, 230, .5);
 }
 .skin-black .sidebar a {
   color: #eee;

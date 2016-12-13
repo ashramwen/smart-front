@@ -1,60 +1,20 @@
 <div class="app-portal skin-black" id="wrapper" ng-init="portalInit()">
-    <header class="header">
-        <a href="index.html" class="logo">
-            {{'portalNamBref' | translate}}
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a class="navbar-btn sidebar-toggle" ng-click="toggleMenu()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <div class="navbar-right">
-                <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <!--<li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    </li>-->
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu" uib-dropdown>
-                        <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                            <i class="fa fa-user"></i>
-                            <span>{{credential.userName}} <i class="caret"></i></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                            <li>
-                                <a ng-click="logout()"><i class="fa fa-ban fa-fw pull-right"></i> {{'user.logout' | translate}}</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="left-side" style="min-height: 100%;">
+            <div class="logo-title">{{'portalNamBref' | translate}}</div>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="images/kiicloud-logo.png" class="img-circle" alt="User Image">
+                    <div class="image">
+                        <img src="images/icon_avatar.png" width="43" height="43" class="img-circle" alt="User Image">
                     </div>
-                    <div class="pull-left info">
-                        <p>{{ 'user.hello' | translate: credential }}</p>
-
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
+                    <div class="info"> {{credential.userName}}</div>
                 </div>
                 <ul class="sidebar-menu">
                     <li ng-repeat="nav in portalNavs | orderBy: 'order'" ng-class="{'active':isActive(nav.state.name)}" ng-if="!nav.hidden" >
-                        <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"><i class="fa fa-fw" ng-class="nav.icon"></i> {{ 'portalModules.' + nav.name + '.displayName' | translate}}<span class="fa arrow"></span></a>
+                        <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"> {{ 'portalModules.' + nav.name + '.displayName' | translate}}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level" uib-collapse="!isActive(nav.state.name)">
                             <li ng-repeat="subNav in nav.subViews | orderBy: 'order'" ng-if="!subNav.hidden" ng-class="{'active': isActive(subNav.state.name)}">
                                 <a ui-sref="{{(!subNav.state.abstract? subNav.state.name: subNav.state.redirectTo)}}">{{'portalModules.' + subNav.name + '.displayName' | translate}}</a>

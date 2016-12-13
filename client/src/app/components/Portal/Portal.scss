@@ -1,6 +1,66 @@
 @import 'src/app/components/AppShared/scss/global.scss';
 .app-portal {
-    #side-menu {}
+    position: relative;
+    min-height: 100%;
+    &::before {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        background: url(../../../images/bg_cloud.png) no-repeat;
+        background-size: 100% 100%;
+        will-change: transform;
+        z-index: 0;
+    }
+    .logo-title {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 26px;
+        color: #e3faff;
+        text-shadow: 0.5px 0.866px 1px #71c4d2;
+    }
+    aside.left-side {
+        padding-top: 0;
+        .user-panel {
+            >.image {
+                text-align: center;
+                >img {
+                    background-color: #fff;
+                    border: 2px solid #5283a7;
+                }
+            }
+            >.info {
+                margin-top: 12px;
+                text-align: center;
+                color: #e8e5d2;
+                font-size: 18px;
+                &::before {
+                    content: ' ';
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    background-color: #a6e05a;
+                    @include border-radius(50%);
+                }
+            }
+        }
+        .sidebar-menu {
+            font-size: 18px;
+            li {
+                a {
+                    &:hover {
+                        background-color: #009ab3;
+                    }
+                    &.active{
+                        background-color: #009ab3;
+                    }
+                }
+            }
+        }
+    }
     .portal-content-body {
         position: relative;
     }

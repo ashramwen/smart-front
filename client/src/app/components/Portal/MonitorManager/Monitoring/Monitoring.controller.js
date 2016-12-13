@@ -7,7 +7,7 @@ angular.module('SmartPortal.Portal')
         $scope.thing = res
     });
 
-    // MonitorService.setAlert();
+    // MonitorService.queryAlert();
 
     MonitorService.on(function(msg) {
         console.log(msg);
@@ -31,7 +31,7 @@ angular.module('SmartPortal.Portal')
     };
 }])
 
-.controller('AlertController', ['$scope', '$uibModalInstance', 'thing', function($scope, $uibModalInstance) {
+.controller('AlertController', ['$scope', '$uibModalInstance', 'thing', function($scope, $uibModalInstance, thing) {
 
     // close modal
     $scope.close = function() {

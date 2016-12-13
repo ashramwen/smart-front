@@ -1,6 +1,6 @@
 angular.module('SmartPortal.Portal')
 
-.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor) {
+.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', 'RuleService', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, RuleService) {
     var thing = {
         'id': 7810,
         'vendorThingID': '0806W-W01-O-001',
@@ -57,44 +57,142 @@ angular.module('SmartPortal.Portal')
         var destination = '/topic/' + thing.kiiAppID + '/' + thing.kiiThingID;
         WebSocketClient.subscribe(destination, function(msg) {
             $rootScope.$apply(function() {
+                // var status = parseStatus(msg.state);
                 callback.apply(_client, msg);
             });
         });
     }
 
     return {
-        getThing: function(id) {
+        getThing: function(_id) {
             var defer = $q.defer();
-            $$Thing.get({ globalThingID: 7810 }).$promise.then(function(res) {
+            $$Thing.get({ globalThingID: _id }).$promise.then(function(res) {
                 res.status = parseStatus(res.status);
                 thing = res;
                 defer.resolve(res);
             });
             return defer.promise;
         },
-        getAlert: function() {},
+        getAlert: function(_id) {
+            return $$Monitor.get({ id: _id }).$promise;
+        },
+        queryAlert: function(_name) {
+            return $$Monitor.query({}, { name: thing.vendorThingID }).$promise;
+        },
         setAlert: function() {
             var _data = {
                 name: thing.vendorThingID,
                 things: [thing.vendorThingID],
-                enable: true,
-                condition: {
-                    type: 'or',
-                    // clauses: []
-                }
+                enable: true
             };
-            $$Monitor.add({}, _data);
+            return $$Monitor.add({}, _data).$promise;
         },
         getHistory: function() {},
         getCount: function() {},
         on: function(callback) {
             if (WebSocketClient.isConnected) {
                 subscribe(callback);
-            } else {
-                $rootScope.$on('stomp.connected', function() {
-                    subscribe(callback);
-                });
+                return;
             }
+            $rootScope.$on('stomp.connected', function() {
+                subscribe(callback);
+            });
         }
     }
-}]);
+}])
+
+.factory('RuleService', function() {
+
+    function Rule(property) {
+        this._property = property;
+        this.displayName = property.displayName;
+        this.enumType = property.enumType;
+        this.type = property.type;
+
+        this.propertyName = property.propertyName;
+        this.update(property);
+    }
+
+    Rule.prototype.update = function(_property) {
+        if (!_property.enumType && (_property.type === 'int' || _property.type === 'float')) {
+            this.displayValue = _property.value;
+        } else {
+            var _displayValue = _property.options.find(function(o) { return o.value === _property.value }.bind(this));
+            this.displayValue = _displayValue ? _displayValue.text : _property.value;
+        }
+        this.expression = _property.expression ? _property.expression : 'eq';
+        this.value = _property.value;
+    }
+
+    Rule.prototype.toClause = function() {
+        var clause = null;
+        switch (this.expression) {
+            case 'gt':
+                clause = {
+                    type: 'range',
+                    field: this.propertyName,
+                    lowerLimit: this.value,
+                    lowerIncluded: false
+                };
+                break;
+            case 'gte':
+                clause = {
+                    type: 'range',
+                    field: this.propertyName,
+                    lowerLimit: this.value
+                }
+                break;
+            case 'lt':
+                clause = {
+                    type: 'range',
+                    field: this.propertyName,
+                    upperLimit: this.value,
+                    upperIncluded: false
+                }
+                break;
+            case 'lte':
+                clause = {
+                    type: 'range',
+                    field: this.propertyName,
+                    upperLimit: this.value
+                }
+                break;
+            default:
+                clause = {
+                    type: 'eq',
+                    field: this.propertyName,
+                    value: this.value
+                }
+                break;
+        }
+        return clause;
+    }
+
+    Rule.fromClause = function(_clause, _property) {
+        _property = angular.copy(_property);
+        if (_clause.type === 'eq') {
+            _property.value = _clause.value;
+            _property.expression = _clause.type;
+        } else if (_clause.hasOwnProperty('lowerIncluded')) {
+            _property.value = _clause.lowerLimit;
+            _property.expression = 'gt';
+        } else if (_clause.hasOwnProperty('upperIncluded')) {
+            _property.value = _clause.upperLimit;
+            _property.expression = 'lt';
+        } else if (_clause.hasOwnProperty('lowerLimit')) {
+            _property.value = _clause.lowerLimit;
+            _property.expression = 'gte';
+        } else {
+            _property.value = _clause.upperLimit;
+            _property.expression = 'lte';
+        }
+        return new Rule(_property);
+    }
+
+    return {
+        newRule: function(_property) {
+            return new Rule(_property);
+        },
+        fromClause: Rule.fromClause
+    }
+});
