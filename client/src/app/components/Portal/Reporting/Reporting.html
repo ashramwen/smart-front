@@ -1,0 +1,27 @@
+<reporting>
+  <div gridster="gridsterOpts">
+    <div ng-repeat="chart in charts | filter: displayTagFilter" gridster-item="customChartMap">
+      <div class="panel">
+        <div class="panel-body">
+
+          <!-- Kii Chart -->
+          <div class="grid-content">
+            <title>{{chart.name}}</title>
+            <kii-chart 
+              query="chart.options.query"
+              period="chart.period"
+              window="0"
+              location=""
+              refresh="chart.refreshChart"
+              stage="false"
+              level="chart.options.level"
+              style="height: 100%">
+            </kii-chart>
+          </div>
+          <!-- end of chart -->
+        </div>
+      </div>
+      <input type="hidden" class="chart-id" ng-model="chart.id">
+    </div>
+  </div>
+</reporting>
