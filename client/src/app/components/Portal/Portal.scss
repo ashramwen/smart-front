@@ -23,6 +23,8 @@
         text-shadow: 0.5px 0.866px 1px #71c4d2;
     }
     aside.left-side {
+        background: rgba(64, 181, 198, .749);
+        border-right: 1px solid rgba(163, 216, 230, .5);
         padding-top: 0;
         .user-panel {
             >.image {
@@ -47,16 +49,22 @@
                 }
             }
         }
+        .sidebar {
+            border: none;
+        }
         .sidebar-menu {
             font-size: 18px;
             li {
+                border: none !important;
                 a {
+                    border: none;
                     &:hover {
                         background-color: #009ab3;
                     }
-                    &.active{
-                        background-color: #009ab3;
-                    }
+                }
+                &.active a {
+                    background-color: #009ab3;
+                    border-right: 3px solid #ff9556;
                 }
             }
         }

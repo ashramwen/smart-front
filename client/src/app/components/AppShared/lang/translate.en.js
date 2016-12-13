@@ -22,8 +22,7 @@
             "selectDefault": "-- Select --",
             "back": "Back"
         },
-        "monitorManager": {
-            "addChannel": "Add monitoring channel",
+        "monitoring": {
             "alert": {
                 "alertOption": "Options",
                 "alertType": "Type",
@@ -33,10 +32,8 @@
                 "readAll": "Read all",
                 "set": "Alert Setting"
             },
-            "monitoring": {
-                "title": "Status"
-            },
-            "save": "Save"
+            "save": "Save",
+            "title": "Status"
         },
         "portalName": "Smart Portal",
         "portalNamBref": "Smart Portal",
@@ -59,7 +56,7 @@
                     "displayName": "Custom Charts"
                 }
             },
-            "monitorManager": {
+            "monitoring": {
                 "displayName": "Device Monitoring",
                 "history": {
                     "displayName": "Alert History"

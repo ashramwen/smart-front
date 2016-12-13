@@ -36,11 +36,6 @@
         <aside class="right-side shrink">
             <!-- Main content -->
             <section class="content">
-                <ol class="breadcrumb">
-                    <li ng-repeat="nav in getStateChan($state.current)">
-                      <a ui-sref="{{(!nav.abstract? nav.name: nav.redirectTo)}}($state.params)">{{'portalModules.' + nav.stateName + '.displayName'| translate}}</a>
-                    </li>
-                </ol>
                 <div class="row portal-row" ng-if="$state.current.description && $state.current.description!=''")>
                     <div class="module-description">
                         {{$state.current.description}}

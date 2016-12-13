@@ -22,8 +22,7 @@
             "save": "保存",
             "back": "返回"
         },
-        "monitorManager": {
-            "addChannel": "添加监控频道",
+        "monitoring": {
             "alert": {
                 "alertOption": "参数项",
                 "alertType": "条件类型",
@@ -33,10 +32,8 @@
                 "readAll": "全部为已读",
                 "set": "警报设置"
             },
-            "monitoring": {
-                "title": "监控状态"
-            },
-            "save": "保存设置"
+            "save": "保存设置",
+            "title": "监控状态"
         },
         "portalName": "智能管理平台",
         "portalNamBref": "智能管理平台",
@@ -59,7 +56,7 @@
                     "displayName": "自定义图表"
                 }
             },
-            "monitorManager": {
+            "monitoring": {
                 "displayName": "设备监控",
                 history: {
                     "displayName": "监控记录"

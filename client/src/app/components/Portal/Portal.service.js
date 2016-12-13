@@ -47,8 +47,8 @@ angular.module('SmartPortal.Portal')
 
     PortalService.getPortalNavs = function() {
         return [{
-            name: 'monitorManager',
-            state: $state.get('app.portal.MonitorManager'),
+            name: 'monitoring',
+            state: $state.get('app.portal.Monitoring'),
             icon: 'fa-tv'
         }, {
             name: 'reporting',
