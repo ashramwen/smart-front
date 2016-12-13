@@ -4,8 +4,8 @@ var MyApp = angular.module('SmartPortal', ['ui.router',
     'SmartPortal.Secure', 'SmartPortal.AppShared', 'SmartPortal.Portal',
     'pascalprecht.translate', 'gridster'
 ]);
-MyApp
-    .constant('AUTH_EVENTS', {
+
+MyApp.constant('AUTH_EVENTS', {
     tokenNotGiven: 'token-not-given',
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',

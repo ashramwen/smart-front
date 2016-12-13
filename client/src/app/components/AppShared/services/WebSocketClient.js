@@ -9,7 +9,7 @@ angular.module('SmartPortal.AppShared')
     var init = (function() {
         _client = Stomp.client(webSocketPath);
         var connect_callback = function(frame) {
-            console.log('Connected: ' + frame);
+            // console.log('Connected: ' + frame);
             $rootScope.$broadcast('stomp.connected');
         };
         var error_callback = function(error) {
@@ -22,11 +22,8 @@ angular.module('SmartPortal.AppShared')
     })();
 
     return {
-        isConnected: function() {
-            return _client.connected || false;
-        },
-        subscribe: function(app, thingId, callback, headers) {
-            var destination = '/topic/' + app + '/' + thingId;
+        isConnected: (_client.connected || false),
+        subscribe: function(destination, callback, headers) {
             if (subscriptionList.indexOf(destination) > -1) return;
             subscriptionList.push(destination);
             var s = _client.subscribe(destination, function() {

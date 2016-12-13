@@ -10,19 +10,8 @@
                 "history": "监控记录",
                 "isRead": "已读",
                 "readAll": "全部为已读",
-                "setAlert": "警报设置"
+                "set": "警报设置"
             },
-            "channel": {
-                "create": "创建频道",
-                "desc": "频道说明",
-                "info": "频道信息",
-                "name": "频道名称",
-                "selectDevice": "设备选择",
-                "update": "保存提交",
-                "goBack": "返回"
-            },
-            "deleteChannelMsg": "是否删除频道？",
-            "deviceNumber": "设备数量",
             "monitoring": {
                 "title": "监控状态"
             },
@@ -54,7 +43,7 @@
                 history: {
                     "displayName": "监控记录"
                 },
-                "realtime": {
+                "monitoring": {
                     "displayName": "实时监控"
                 },
                 "monitorView": {

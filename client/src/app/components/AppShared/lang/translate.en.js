@@ -7,24 +7,13 @@
                 "alertOption": "Options",
                 "alertType": "Type",
                 "alertValue": "Value",
-                "history": "History",
+                "history": "Alert History",
                 "isRead": "read",
                 "readAll": "Read all",
-                "setAlert": "Set alert"
+                "set": "Alert Setting"
             },
-            "channel": {
-                "create": "Create",
-                "desc": "Description",
-                "info": "Info",
-                "name": "Name",
-                "selectDevice": "Select device",
-                "update": "Update",
-                "goBack": "Go back"
-            },
-            "deleteChannelMsg": "Sure to delete this Channel?",
-            "deviceNumber": "Device number",
             "monitoring": {
-                "title": "Monitoring"
+                "title": "Status"
             },
             "save": "Save"
         },
@@ -50,12 +39,12 @@
                 }
             },
             "monitorManager": {
-                "displayName": "Thing Monitoring",
+                "displayName": "Device Monitoring",
                 "history": {
                     "displayName": "Alert History"
                 },
-                "realtime": {
-                    "displayName": "Real Time Monitoring"
+                "monitoring": {
+                    "displayName": "Device Monitoring"
                 },
                 "monitorView": {
                     "displayName": "Monitoring Views",
