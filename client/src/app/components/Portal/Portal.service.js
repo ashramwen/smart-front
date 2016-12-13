@@ -50,27 +50,10 @@ angular.module('SmartPortal.Portal')
             name: 'monitorManager',
             state: $state.get('app.portal.MonitorManager'),
             icon: 'fa-tv'
-                // }, {
-                //     name: 'reporting',
-                //     state: $state.get('app.portal.Reporting'),
-                //     icon: 'fa-area-chart',
-                //     subViews: [{
-                //             name: 'reporting.energyReporting',
-                //             state: $state.get('app.portal.Reporting.Electricity')
-                //         },
-                //         {
-                //             name: 'reporting.environmentReporting',
-                //             state: $state.get('app.portal.Reporting.Environment')
-                //         },
-                //         {
-                //             name: 'reporting.densityReporting',
-                //             state: $state.get('app.portal.Reporting.DensityDetection')
-                //         },
-                //         {
-                //             name: 'reporting.customCharts',
-                //             state: $state.get('app.portal.Reporting.CustomCharts')
-                //         }
-                //     ]
+        }, {
+            name: 'reporting',
+            state: $state.get('app.portal.Reporting'),
+            icon: 'fa-area-chart'
         }];
     }
 

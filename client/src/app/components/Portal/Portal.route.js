@@ -10,6 +10,12 @@ angular.module('SmartPortal.Portal')
             redirectTo: 'app.portal.MonitorManager.Monitoring',
             stateName: 'monitorManager'
         })
+        .state('app.portal.Reporting', {
+            url: '/Reporting',
+            controller: 'ReportingController',
+            templateUrl: 'app/components/Portal/Reporting/Reporting.html',
+            stateName: 'reporting',
+        })
         .state('app.portal.Welcome', {
             url: '/Welcome',
             templateUrl: 'app/components/Portal/Welcome/Welcome.html',

@@ -32,7 +32,12 @@ gulp.task('inject', function () {
 
   var wiredepOptions = {
     directory: 'bower_components',
-    exclude: [/bootstrap\.js/]
+    exclude: [/bootstrap\.js/],
+    overrides: {
+      'echarts': {
+        main:['./dist/echarts.min.js']
+      }
+    }
   };
 
   var injectBin = gulp.src([

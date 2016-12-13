@@ -2,8 +2,9 @@
 
 var MyApp = angular.module('SmartPortal', ['ui.router',
     'SmartPortal.Secure', 'SmartPortal.AppShared', 'SmartPortal.Portal',
-    'pascalprecht.translate'
+    'pascalprecht.translate', 'gridster'
 ]);
+
 MyApp.constant('AUTH_EVENTS', {
     tokenNotGiven: 'token-not-given',
     loginSuccess: 'auth-login-success',
@@ -73,6 +74,29 @@ MyApp.constant('AUTH_EVENTS', {
                     $state.go(to.redirectTo, params, { location: 'replace' })
                 }
             });
+
+            window.ECharts = echarts;
+            _.noConflict();
+
+            KiiReporting.KiiQueryConfig.setConfig({
+                token: 'Bearer super_token',
+                site: 'http://121.199.7.69',
+                port: 9200,
+                timeStampField: 'state.date',
+                chartOptions: {
+                  _backButton: {
+                    style: {
+                      position: 'absolute',
+                      top: '-10px',
+                      left: '10px'
+                    },
+                    cssClass: "btn btn-warning",
+                    text: '返回'
+                  },
+                  color: ['#ffa976', '#f88dc7', '#9ae05a', '#53d9db', '#9ee6f6', '#ecc475', '#7abce2', '#dee27a', '#927ae2', '#7ae2c3', '#ffdcc7', '#7986CB', '#B0BEC5', '#8D6E63', '#BA68C8', '#FF7043']
+                }
+            });
+              
         }
     ]
 );

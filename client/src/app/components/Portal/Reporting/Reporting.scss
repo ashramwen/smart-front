@@ -1,0 +1,75 @@
+reporting{
+  .gridster-mobile{
+    .gridster-item{
+      height: 300px;
+    }
+  }
+  .gridster{
+    margin-left: -10px;
+    margin-right: -10px;
+    .gridster-item{
+      overflow: hidden;
+      .panel{
+        margin-bottom: 0px;
+        height: 100%;
+        .panel-heading{
+          transition: all 0.3s;
+          margin-top: -41px;
+          position: relative;
+          z-index: 2;
+          .fa{
+            cursor: pointer;
+            &.fa-edit{
+              position: absolute;
+              right: 40px;
+              top: 15px;
+            }
+            &.fa-trash{
+              position: absolute;
+              right: 15px;
+              top: 15px;
+            }
+          }
+          
+        }
+        .panel-body{
+          transition: all 0.3s;
+          overflow: auto;
+          height: 100%;
+          margin-top: 0px;
+          position: relative;
+          z-index: 1;
+          .grid-content{
+            height: 100%;
+            title{
+              display: block;
+              width: 100%;
+              height: 40px;
+              line-height: 40px;
+              text-align: center;
+              font-size: 17px;
+              position: absolute;
+              left: 0px;
+              top: 0px;
+            }
+            kii-chart{
+              padding-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .location-tag{
+    margin-right: 10px;
+    margin-bottom: 5px;
+    .fa-remove{
+      display: none;
+    }
+    &:hover{
+      .fa-remove{
+        display: inline-block;
+      }
+    }
+  }
+}

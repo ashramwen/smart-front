@@ -45,7 +45,7 @@
                 "displayName": "Welcome"
             },
             "reporting": {
-                "displayName": "Visual Data",
+                "displayName": "Smart Data",
                 "energyReporting": {
                     "displayName": "Energy Report"
                 },
