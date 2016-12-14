@@ -1,8 +1,28 @@
 (function(win) {
     win.translations = win.translations || {};
     win.translations.en = {
-        "monitorManager": {
-            "addChannel": "Add monitoring channel",
+        "controls": {
+            "refresh": "Refresh",
+            "create": "Create",
+            "submit": "Submit",
+            "finish": "Done",
+            "cancel": "Cancel",
+            "save": "Save",
+            "yes": "yes",
+            "no": "no",
+            "add": "Add",
+            "delete": "Delete",
+            "edit": "Edit",
+            "ok": "Ok",
+            "selectAll": "Select All",
+            "view": "View",
+            "search": "Search",
+            "operate": "Operate",
+            "selectedList": "Selected",
+            "selectDefault": "-- Select --",
+            "back": "Back"
+        },
+        "monitoring": {
             "alert": {
                 "alertOption": "Options",
                 "alertType": "Type",
@@ -12,10 +32,8 @@
                 "readAll": "Read all",
                 "set": "Alert Setting"
             },
-            "monitoring": {
-                "title": "Status"
-            },
-            "save": "Save"
+            "save": "Save",
+            "title": "Status"
         },
         "portalName": "Smart Portal",
         "portalNamBref": "Smart Portal",
@@ -38,7 +56,7 @@
                     "displayName": "Custom Charts"
                 }
             },
-            "monitorManager": {
+            "monitoring": {
                 "displayName": "Device Monitoring",
                 "history": {
                     "displayName": "Alert History"

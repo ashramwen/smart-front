@@ -1,8 +1,28 @@
 (function(win) {
     win.translations = win.translations || {};
     win.translations.cn = {
-        "monitorManager": {
-            "addChannel": "添加监控频道",
+        "controls": {
+            "refresh": "刷新",
+            "create": "创建",
+            "submit": "提交",
+            "finish": "完成",
+            "cancel": "取消",
+            "yes": "是",
+            "no": "否",
+            "add": "添加",
+            "delete": "删除",
+            "edit": "编辑",
+            "ok": "确定",
+            "selectAll": "全选",
+            "view": "查看",
+            "search": "搜索",
+            "operate": "操作",
+            "selectedList": "已选列表",
+            "selectDefault": "请选择",
+            "save": "保存",
+            "back": "返回"
+        },
+        "monitoring": {
             "alert": {
                 "alertOption": "参数项",
                 "alertType": "条件类型",
@@ -12,10 +32,8 @@
                 "readAll": "全部为已读",
                 "set": "警报设置"
             },
-            "monitoring": {
-                "title": "监控状态"
-            },
-            "save": "保存设置"
+            "save": "保存设置",
+            "title": "监控状态"
         },
         "portalName": "智能管理平台",
         "portalNamBref": "智能管理平台",
@@ -38,7 +56,7 @@
                     "displayName": "自定义图表"
                 }
             },
-            "monitorManager": {
+            "monitoring": {
                 "displayName": "设备监控",
                 history: {
                     "displayName": "监控记录"

@@ -4,10 +4,10 @@ angular.module('SmartPortal.Portal')
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('app.portal.MonitorManager', {
+        .state('app.portal.Monitoring', {
             url: '/Monitoring',
             templateUrl: 'app/components/Portal/MonitorManager/MonitorManager.html',
-            redirectTo: 'app.portal.MonitorManager.Monitoring',
+            controller: 'MonitorManagerController',
             stateName: 'monitorManager'
         })
         .state('app.portal.Reporting', {
