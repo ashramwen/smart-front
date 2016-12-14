@@ -35,8 +35,8 @@
             "save": "Save",
             "title": "Status"
         },
-        "portalName": "Smart Portal",
-        "portalNamBref": "Smart Portal",
+        "portalName": "CP-Demo",
+        "portalNamBref": "CP-Demo",
         "portalModules": {
             "welcome": {
                 "displayName": "Welcome"

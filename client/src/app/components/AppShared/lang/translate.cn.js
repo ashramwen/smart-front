@@ -35,8 +35,8 @@
             "save": "保存设置",
             "title": "监控状态"
         },
-        "portalName": "智能管理平台",
-        "portalNamBref": "智能管理平台",
+        "portalName": "CP-Demo",
+        "portalNamBref": "CP-Demo",
         "portalModules": {
             "welcome": {
                 "displayName": "欢迎",

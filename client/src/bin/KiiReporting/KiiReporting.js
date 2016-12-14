@@ -964,7 +964,7 @@ webpackJsonp([1,2],{
 	                series: series,
 	                dataZoom: dataZooms,
 	                tooltip: tooltip,
-	                legend: legend.getProperties()
+	                // legend: legend.getProperties()
 	            });
 	        }
 	        this._echartInstance.setOption(this._getEchartOptions());
@@ -1358,13 +1358,16 @@ webpackJsonp([1,2],{
 	class XAxis extends _axis_1._axis {
 	    constructor(options) {
 	        let _options = {
-	            type: 'category',
+	            type: 'value',
 	            splitLine: {
-	                show: false
+	                show: true
 	            },
-	            silent: true
+	            axisTick: {
+	            	length: 0
+	            }
 	        };
 	        _.extend(_options, options);
+	        _options.type = 'value';
 	        super(options);
 	        this.dataZoom.xAxisIndex = 0;
 	    }
@@ -1378,7 +1381,7 @@ webpackJsonp([1,2],{
 	            data: this.data
 	        };
 	        let formatter = (d) => {
-	            if (this.type === 'time') {
+	            if (d> 1000000000000 && d< 2000000000000) {
 	                return KiiChartUtils_1.KiiChartUtils.dateParse(new Date(d));
 	            }
 	            return d;
@@ -1386,8 +1389,24 @@ webpackJsonp([1,2],{
 	        properties.data = _.map(properties.data, formatter);
 	        if (this._dataType == 'time') {
 	            _.extend(properties, {
-	                axisLabel: {}
+	                axisLabel: {},
+	                splitLine: {
+			                show: true
+			            },
+			            axisTick: {
+			            	show: false
+			            }
 	            });
+	        }else{
+	        	_.extend(properties, {
+                axisLabel: {},
+		            splitLine: {
+		                show: true
+		            },
+		            axisTick: {
+		            	show: false
+		            }
+            });
 	        }
 	        return properties;
 	    }
@@ -1410,12 +1429,17 @@ webpackJsonp([1,2],{
 	            minInterval: 1,
 	            type: 'value',
 	            splitLine: {
-	                show: false
+	                show: true
 	            },
+	            splitNumber: 5,
 	            axisLabel: {
 	                formatter: (value, index) => {
 	                    return value / this._scaleTimes;
 	                }
+	            },
+	            axisTick: {
+	            	show: false,
+	            	length: 0
 	            },
 	            boundaryGap: ['10%', '10%'],
 	            silent: true,
@@ -1450,12 +1474,17 @@ webpackJsonp([1,2],{
 	            scale = false;
 	        }
 	        return {
-	            name: this.name + '(单位：' + this._scaleTimes + ')',
+	            name: '',
 	            groupID: this.getGroupID(),
 	            axisLabel: {
 	                formatter: formatter
 	            },
-	            scale: scale
+	            splitNumber: 5,
+	            scale: scale,
+	            axisTick: {
+	            	show: false,
+	            	length: 0
+	            }
 	        };
 	    }
 	    _scale() {
@@ -1510,7 +1539,7 @@ webpackJsonp([1,2],{
 	    constructor(options) {
 	        _.extend(this, options);
 	        let dataZoomOptions = {
-	            show: true,
+	            show: false,
 	            realtime: true,
 	            start: 0,
 	            end: 100,
@@ -2749,7 +2778,7 @@ webpackJsonp([1,2],{
 
 	"use strict";
 	exports.constants = {
-	    DATE_DISPLAY_NAME: '时间',
+	    DATE_DISPLAY_NAME: '',
 	    KiiFields: {
 	        AGG_FIELD_DISPLAY_NAME: '_kii_agg_field_name',
 	        QUERY_PATH: '_kii_query_path',

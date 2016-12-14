@@ -9,9 +9,9 @@ angular.module('SmartPortal.Portal')
 
     // MonitorService.queryAlert();
 
-    MonitorService.on(function(msg) {
+    MonitorService.onThing(function(msg) {
         console.log(msg);
-    })
+    });
 
     $scope.set = function() {
         var modalInstance = $uibModal.open({
@@ -19,7 +19,8 @@ angular.module('SmartPortal.Portal')
             backdrop: 'static',
             templateUrl: 'app-portal-monitormanager-setalert',
             controller: 'AlertController',
-            size: 'sm',
+            // size: 'sm',
+            windowClass: 'center-modal',
             resolve: {
                 thing: $scope.thing
             }

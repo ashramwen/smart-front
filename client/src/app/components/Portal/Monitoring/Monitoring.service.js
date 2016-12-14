@@ -25,22 +25,25 @@ angular.module('SmartPortal.Portal')
         'globalThingID': 7810
     };
 
+    var mapping = {
+        'HUM': { display: 'Humidity', unit: '%', min: 0, max: 100 },
+        'HCHO': { display: 'TVOC', unit: 'ppm', min: 0, max: 50 },
+        'PM25': { display: 'PM2.5', unit: 'ppm', min: 0, max: 1000 },
+        'CO2': { display: 'CO2', unit: 'ppm', min: 400, max: 10000 },
+        'PM10': { display: 'PM10', unit: 'ppm', min: 0, max: 1000 },
+        'CO': { display: 'CO', unit: 'ppm', min: 0, max: 1000 },
+        'TEP': { display: 'Temperature', unit: '℃', min: -20, max: 50 }
+    };
+
+    var dirt = ['date', 'target'];
+
     function parseStatus(statuses) {
-        var dirt = ['date', 'target'];
         if (statuses) {
             dirt.forEach(function(o) {
                 delete statuses[o];
             });
         }
-        var mapping = {
-            'HUM': { display: 'Humidity', unit: '%', min: 0, max: 100 },
-            'HCHO': { display: 'TVOC', unit: 'ppm', min: 0, max: 50 },
-            'PM25': { display: 'PM2.5', unit: 'ppm', min: 0, max: 1000 },
-            'CO2': { display: 'CO2', unit: 'ppm', min: 400, max: 10000 },
-            'PM10': { display: 'PM10', unit: 'ppm', min: 0, max: 1000 },
-            'CO': { display: 'CO', unit: 'ppm', min: 0, max: 1000 },
-            'TEP': { display: 'Temperature', unit: '℃', min: -20, max: 50 }
-        };
+
         statuses = Object.keys(statuses).map(function(key, index) {
             var map = mapping[key];
             if (mapping[key]) {
@@ -53,15 +56,26 @@ angular.module('SmartPortal.Portal')
         return statuses;
     }
 
-    function subscribe(callback) {
-        var destination = '/topic/' + thing.kiiAppID + '/' + thing.kiiThingID;
+    var thingCallback = null;
+    var noticeCallback = null;
+    var destination = '/topic/' + thing.kiiAppID + '/' + thing.kiiThingID;
+
+    WebSocketClient.isConnected ? subscribe() : $rootScope.$on('stomp.connected', subscribe);
+
+    function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
-            $rootScope.$apply(function() {
-                // var status = parseStatus(msg.state);
-                callback.apply(_client, msg);
-            });
+            thing.status = parseStatus(msg.state);
+            thingCallback && thingCallback.apply(this, [thing]);
+        });
+        WebSocketClient.subscribe('/socket/users/notices', function(res) {
+            console.log('notice', res);
+            noticeCallback && noticeCallback.apply(this, [res]);
         });
     }
+
+    $rootScope.$on('$destroy', function() {
+        WebSocketClient.unsubscribeAll();
+    });
 
     return {
         getThing: function(_id) {
@@ -70,6 +84,10 @@ angular.module('SmartPortal.Portal')
                 res.status = parseStatus(res.status);
                 thing = res;
                 defer.resolve(res);
+            }, function(err) {
+                console.log('get thing error:', err);
+                thing.status = parseStatus(thing.status);
+                defer.resolve(thing);
             });
             return defer.promise;
         },
@@ -89,14 +107,11 @@ angular.module('SmartPortal.Portal')
         },
         getHistory: function() {},
         getCount: function() {},
-        on: function(callback) {
-            if (WebSocketClient.isConnected) {
-                subscribe(callback);
-                return;
-            }
-            $rootScope.$on('stomp.connected', function() {
-                subscribe(callback);
-            });
+        onThing: function(callback) {
+            thingCallback = callback;
+        },
+        onNotice: function(callback) {
+            noticeCallback = callback;
         }
     }
 }])

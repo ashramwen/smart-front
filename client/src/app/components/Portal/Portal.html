@@ -7,14 +7,14 @@
             <section class="sidebar">
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
-                    <div class="image">
-                        <img src="images/icon_avatar.png" width="43" height="43" class="img-circle" alt="User Image">
+                    <div class="image img-circle">
+                        <img src="images/icon_avatar.png" width="43" height="43" alt="User Image">
                     </div>
                     <div class="info"> {{credential.userName}}</div>
                 </div>
                 <ul class="sidebar-menu">
                     <li ng-repeat="nav in portalNavs | orderBy: 'order'" ng-class="{'active':isActive(nav.state.name)}" ng-if="!nav.hidden" >
-                        <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"> {{ 'portalModules.' + nav.name + '.displayName' | translate}}<span class="fa arrow"></span></a>
+                        <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"> {{ 'portalModules.' + nav.name + '.displayName' | translate}}</a>
                         <ul class="nav nav-second-level" uib-collapse="!isActive(nav.state.name)">
                             <li ng-repeat="subNav in nav.subViews | orderBy: 'order'" ng-if="!subNav.hidden" ng-class="{'active': isActive(subNav.state.name)}">
                                 <a ui-sref="{{(!subNav.state.abstract? subNav.state.name: subNav.state.redirectTo)}}">{{'portalModules.' + subNav.name + '.displayName' | translate}}</a>
