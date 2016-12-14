@@ -20,6 +20,7 @@ angular.module('SmartPortal.Portal')
     $scope.getStateChan = PortalService.getStateChan;
     $scope.getStateDisplayName = PortalService.getStateDisplayName;
     $scope.isActive = PortalService.isActive;
+    $scope.credential = SessionService.getPortalAdmin();
 
     $scope.getFirstChild = function(nav) {
         return _.find(nav.subViews, function(subView) {
