@@ -15,7 +15,7 @@
     <div class="row card-columns clearfix">
 
       <!-- START card -->
-      <div class="card" ng-repeat="s in thing.status track by s.name" ng-class="{'warn':$index===3}">
+      <div class="card" ng-repeat="s in thing.status track by s.name" ng-class="{'warn': s.warn}">
         <div class="head">
           <div class="status"></div>
           <div class="attribute"><span>{{s.display}} / {{s.unit}}</span></div>

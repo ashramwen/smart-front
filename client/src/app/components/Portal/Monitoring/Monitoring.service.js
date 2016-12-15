@@ -1,6 +1,6 @@
 angular.module('SmartPortal.Portal')
 
-.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', 'RuleService', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, RuleService) {
+.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor) {
     var thing = {
         'id': 7174,
         'createDate': 1481783151000,
@@ -10,18 +10,6 @@ angular.module('SmartPortal.Portal')
         'vendorThingID': '0806W-W01-O-001',
         'kiiAppID': '192b49ce',
         'type': 'EnvironmentSensor',
-        // 'status': {
-        //     'date': 1481783380000,
-        //     'HUM': 45.7,
-        //     'HCHO': 0.01,
-        //     'PM25': 30,
-        //     'CO2': 915,
-        //     'PM10': 56,
-        //     'CO': 0.05,
-        //     'TEP': 25.5,
-        //     'target': 'th.f83120e36100-1c9a-6e11-f82c-0d891335'
-        // },
-        // 'status': [],
         'fullKiiThingID': '192b49ce-th.f83120e36100-1c9a-6e11-f82c-0d891335',
         'schemaName': 'EnvironmentSensor',
         'schemaVersion': '1',
@@ -31,6 +19,14 @@ angular.module('SmartPortal.Portal')
     };
 
     var monitorID = '6f7c3190-c293-11e6-a9c1-00163e02138f';
+
+    var monitor = {
+        "monitorID": "6f7c3190-c293-11e6-a9c1-00163e02138f",
+        "name": "0806W-W01-O-001",
+        "things": ["0806W-W01-O-001"],
+        "enable": true,
+        "additions": {}
+    };
 
     var mapping = {
         'HUM': { display: 'Humidity', unit: '%', min: 0, max: 100 },
@@ -44,22 +40,31 @@ angular.module('SmartPortal.Portal')
 
     var dirt = ['date', 'target'];
 
-    function parseStatus(statuses) {
-        if (!statuses) return;
+    // from thing API
+    function parseStatus(res) {
+        thing = res;
+        if (!thing.status) return;
         dirt.forEach(function(o) {
-            delete statuses[o];
+            delete thing.status[o];
         });
 
-        statuses = Object.keys(statuses).map(function(key, index) {
+        for (var key in thing.status) {
+            if (!thing.status.hasOwnProperty(key)) continue;
             var map = mapping[key];
-            if (mapping[key]) {
-                return Object.assign({
-                    name: key,
-                    value: statuses[key]
-                }, map);
+            if (map) {
+                thing.status[key] = Object.assign({ name: key, value: thing.status[key] }, map);
+            } else {
+                delete thing.status[key];
             }
-        });
-        return statuses;
+        }
+    }
+
+    // from websocket
+    function updateStatus(statuses) {
+        for (var key in statuses) {
+            if (!statuses.hasOwnProperty(key) || !thing.status.hasOwnProperty(key)) continue;
+            thing.status[key].value = statuses[key];
+        }
     }
 
     var thingCallback = null;
@@ -70,7 +75,8 @@ angular.module('SmartPortal.Portal')
 
     function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
-            thing.status = parseStatus(msg.state);
+            // console.log('websocket:', msg.state);
+            updateStatus(msg.state);
             thingCallback && thingCallback.apply(this, [thing]);
         });
         WebSocketClient.subscribe('/socket/users/notices', function(res) {
@@ -79,36 +85,72 @@ angular.module('SmartPortal.Portal')
         });
     }
 
+    function genCondition() {
+        var _clauses = [];
+        Object.keys(thing.status).forEach(function(key) {
+            var status = thing.status[key];
+            if (status.lower) {
+                _clauses.push({
+                    type: 'range',
+                    field: status.name,
+                    lowerLimit: status.lower
+                });
+            }
+            if (status.upper) {
+                _clauses.push({
+                    type: 'range',
+                    field: status.name,
+                    upperLimit: status.lower
+                });
+            }
+        });
+        if(!_clauses.length) return;
+        return {
+            type: 'or',
+            clauses: _clauses
+        };
+    }
+
     $rootScope.$on('$destroy', function() {
         WebSocketClient.unsubscribeAll();
     });
 
     return {
+        get: function() {
+            return {
+                thing: thing,
+                monitor: monitor
+            };
+        },
         getThing: function() {
             var defer = $q.defer();
             $$Thing.get({ globalThingID: thing.id }).$promise.then(function(res) {
-                res.status = parseStatus(res.status);
-                thing = res;
-                defer.resolve(res);
+                parseStatus(res);
+                defer.resolve(thing);
             }, function(err) {
                 console.log('get thing error:', err);
                 defer.resolve(thing);
             });
             return defer.promise;
         },
-        getAlert: function() {
-            return $$Monitor.get({ id: monitorID }).$promise;
+        getMonitor: function() {
+            var defer = $q.defer();
+            $$Monitor.get({ id: monitor.monitorID }).$promise.then(function(res) {
+                console.log(res);
+            });
+            return defer.promise;
         },
-        queryAlert: function(_name) {
+        queryMonitor: function(_name) {
             return $$Monitor.query({}, { name: thing.vendorThingID }).$promise;
         },
-        setAlert: function() {
+        setMonitor: function() {
             var _data = {
                 name: thing.vendorThingID,
                 things: [thing.vendorThingID],
-                enable: true
+                enable: true,
+                condition: genCondition()
             };
-            return $$Monitor.add({}, _data).$promise;
+            return $$Monitor.update({ id: monitor.monitorID }, _data).$promise;
         },
         getHistory: function() {},
         getCount: function() {},
@@ -119,100 +161,4 @@ angular.module('SmartPortal.Portal')
             noticeCallback = callback;
         }
     }
-}])
-
-.factory('RuleService', function() {
-
-    function Rule(property) {
-        this._property = property;
-        this.displayName = property.displayName;
-        this.enumType = property.enumType;
-        this.type = property.type;
-
-        this.propertyName = property.propertyName;
-        this.update(property);
-    }
-
-    Rule.prototype.update = function(_property) {
-        if (!_property.enumType && (_property.type === 'int' || _property.type === 'float')) {
-            this.displayValue = _property.value;
-        } else {
-            var _displayValue = _property.options.find(function(o) { return o.value === _property.value }.bind(this));
-            this.displayValue = _displayValue ? _displayValue.text : _property.value;
-        }
-        this.expression = _property.expression ? _property.expression : 'eq';
-        this.value = _property.value;
-    }
-
-    Rule.prototype.toClause = function() {
-        var clause = null;
-        switch (this.expression) {
-            case 'gt':
-                clause = {
-                    type: 'range',
-                    field: this.propertyName,
-                    lowerLimit: this.value,
-                    lowerIncluded: false
-                };
-                break;
-            case 'gte':
-                clause = {
-                    type: 'range',
-                    field: this.propertyName,
-                    lowerLimit: this.value
-                }
-                break;
-            case 'lt':
-                clause = {
-                    type: 'range',
-                    field: this.propertyName,
-                    upperLimit: this.value,
-                    upperIncluded: false
-                }
-                break;
-            case 'lte':
-                clause = {
-                    type: 'range',
-                    field: this.propertyName,
-                    upperLimit: this.value
-                }
-                break;
-            default:
-                clause = {
-                    type: 'eq',
-                    field: this.propertyName,
-                    value: this.value
-                }
-                break;
-        }
-        return clause;
-    }
-
-    Rule.fromClause = function(_clause, _property) {
-        _property = angular.copy(_property);
-        if (_clause.type === 'eq') {
-            _property.value = _clause.value;
-            _property.expression = _clause.type;
-        } else if (_clause.hasOwnProperty('lowerIncluded')) {
-            _property.value = _clause.lowerLimit;
-            _property.expression = 'gt';
-        } else if (_clause.hasOwnProperty('upperIncluded')) {
-            _property.value = _clause.upperLimit;
-            _property.expression = 'lt';
-        } else if (_clause.hasOwnProperty('lowerLimit')) {
-            _property.value = _clause.lowerLimit;
-            _property.expression = 'gte';
-        } else {
-            _property.value = _clause.upperLimit;
-            _property.expression = 'lte';
-        }
-        return new Rule(_property);
-    }
-
-    return {
-        newRule: function(_property) {
-            return new Rule(_property);
-        },
-        fromClause: Rule.fromClause
-    }
-});
+}]);

@@ -18,7 +18,7 @@ angular.module('SmartPortal.AppShared')
             console.log('stomp error', error);
         };
         _client.connect(connectHeaders, connect_callback, error_callback);
-        // _client.debug = angular.noop();
+        _client.debug = angular.noop();
     })();
 
     return {

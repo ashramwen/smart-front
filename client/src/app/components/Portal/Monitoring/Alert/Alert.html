@@ -12,14 +12,17 @@
       <div class="title upper pull-left">{{'monitoring.upperLimit' | translate}}</div>
     </div>
     <div class="line"></div>
-    <i class="fa fa-plus-circle fa-2x pull-right" aria-hidden="true"></i>
   </div>
 
-  <table>
-    <tr ng-repeat="r in rules"></tr>
-  </table>
+  <div ng-repeat="s in status track by s.name" class="rule clearfix">
+    <input type="number" class="lower pull-left" ng-model="s.lower">
+    <div class="pull-left">{{s.display}}</div>
+    <input type="number" class="upper pull-left" ng-model="s.upper">
+    <i class="fa fa-minus-circle fa-2x" aria-hidden="true" ng-click="reset(s)"></i>
+    <!--<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>-->
+  </div>
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-orange" ng-click="close()">{{'controls.create' | translate}}</button>
+  <button class="btn btn-orange" ng-click="update()">{{'controls.save' | translate}}</button>
 </div>

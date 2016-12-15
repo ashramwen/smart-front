@@ -134,11 +134,11 @@
     }
 }
 
-.center-modal {
-    position: fixed;
-    top: 30%;
-    left: 18.5%;
-    margin-left: -10%;
+.modal {
+    // position: fixed;
+    top: 10%;
+    // left: 18.5%;
+    // margin-left: -10%;
     .modal-content {
         border: solid 6px rgba(249, 198, 108, .4);
         @include border-radius(6px);

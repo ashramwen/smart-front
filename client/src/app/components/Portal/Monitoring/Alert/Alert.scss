@@ -1,6 +1,38 @@
 @import 'src/app/components/AppShared/scss/global.scss';
 .app-portal-monitoring-alert {
-    table {
-        margin: 0 auto;
+    .fa {
+        cursor: pointer;
+    }
+    .rule {
+        margin-top: 14px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 16px;
+        color: #272b2d;
+        input {
+            text-align: center;
+            width: 150px;
+            border: none;
+            border-bottom: 1px solid #c3cace;
+            outline: none;
+            &.lower {
+                margin-left: 0;
+                color: #4e8ab8;
+            }
+            &.upper {
+                margin-left: 12px;
+                color: #ef7431;
+            }
+        }
+        div {
+            text-align: center;
+            margin-left: 12px;
+            width: 150px;
+            border: 1px solid #c3cace;
+            @include border-radius(18px);
+        }
+        .fa-minus-circle {
+            color: #ff7182;
+        }
     }
 }

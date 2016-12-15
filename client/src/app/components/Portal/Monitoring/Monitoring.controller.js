@@ -7,9 +7,9 @@ angular.module('SmartPortal.Portal')
         $scope.thing = res
     });
 
-    // MonitorService.queryAlert();
-    // MonitorService.setAlert();
-    MonitorService.getAlert();
+    // MonitorService.queryMonitor();
+    // MonitorService.setMonitor();
+    MonitorService.getMonitor();
 
     MonitorService.onThing(function(msg) {
         // console.log(msg);
@@ -21,7 +21,7 @@ angular.module('SmartPortal.Portal')
             backdrop: 'static',
             templateUrl: 'app/components/Portal/Monitoring/Alert/Alert.html',
             controller: 'AlertController',
-            windowClass: 'center-modal app-portal-monitoring-alert'
+            windowClass: 'app-portal-monitoring-alert'
         });
 
         modalInstance.result.then(function() {
