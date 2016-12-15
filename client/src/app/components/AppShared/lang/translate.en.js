@@ -23,20 +23,13 @@
             "back": "Back"
         },
         "monitoring": {
-            "alert": {
-                "alertOption": "Options",
-                "alertType": "Type",
-                "alertValue": "Value",
-                "history": "Alert History",
-                "isRead": "read",
-                "readAll": "Read all",
-                "set": "Alert Setting"
-            },
+            "history": "Alert History",
             "save": "Save",
+            "setalert": "Alert Setting",
             "title": "Status"
         },
-        "portalName": "Smart Portal",
-        "portalNamBref": "Smart Portal",
+        "portalName": "CP-Demo",
+        "portalNamBref": "CP-Demo",
         "portalModules": {
             "welcome": {
                 "displayName": "Welcome"

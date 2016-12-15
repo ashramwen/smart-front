@@ -1,0 +1,34 @@
+<div class="app-portal-monitoring">
+  <div class="container-fluid">
+    <div class="row header">
+      <div class="title pull-left">{{'monitoring.title' | translate}}</div>
+      <div class="func-group pull-right">
+        <button class="btn btn-monitor" ng-click="setAlert()">
+          <img src="images/icon_set.png" width="20" height="19" alt=""> {{'monitoring.setalert' | translate}}
+        </button>
+        <button class="btn btn-monitor" ng-click="history()">
+          <img src="images/icon_history.png" width="28" height="19" alt=""> {{'monitoring.history' | translate}}
+        </button>
+      </div>
+    </div>
+
+    <div class="row card-columns clearfix">
+
+      <!-- START card -->
+      <div class="card" ng-repeat="s in thing.status track by s.name" ng-class="{'warn':$index===3}">
+        <div class="head">
+          <div class="status"></div>
+          <div class="attribute"><span>{{s.display}} / {{s.unit}}</span></div>
+        </div>
+        <div class="body">{{s.value}}</div>
+        <div class="foot">
+          <div class="icon lower pull-left">{{s.min}}</div>
+          <div class="foot-line pull-left"></div>
+          <div class="icon upper pull-right">{{s.max}}</div>
+        </div>
+      </div>
+      <!-- END card -->
+
+    </div>
+  </div>
+</div>

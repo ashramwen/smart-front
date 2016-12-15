@@ -23,15 +23,21 @@
         text-shadow: 0.5px 0.866px 1px #71c4d2;
     }
     aside.left-side {
+        overflow: visible;
         background: rgba(64, 181, 198, .749);
         border-right: 1px solid rgba(163, 216, 230, .5);
         padding-top: 0;
         .user-panel {
             >.image {
+                width: 76px;
+                height: 76px;
+                line-height: 70px;
+                margin: 0 auto;
                 text-align: center;
+                background-color: #fff;
+                border: 2px solid #5283a7;
                 >img {
-                    background-color: #fff;
-                    border: 2px solid #5283a7;
+                    border: none;
                 }
             }
             >.info {
@@ -62,9 +68,22 @@
                         background-color: #009ab3;
                     }
                 }
-                &.active a {
-                    background-color: #009ab3;
-                    border-right: 3px solid #ff9556;
+                &.active {
+                    a {
+                        position: relative;
+                        background-color: #009ab3;
+                        border-right: 2px solid #ff9556;
+                        &::after {
+                            position: absolute;
+                            content: ' ';
+                            display: block;
+                            width: 2px;
+                            height: 100%;
+                            top: 0;
+                            right: -4px;
+                            background-color: #ff9556;
+                        }
+                    }
                 }
             }
         }

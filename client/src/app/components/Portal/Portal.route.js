@@ -6,9 +6,9 @@ angular.module('SmartPortal.Portal')
     $stateProvider
         .state('app.portal.Monitoring', {
             url: '/Monitoring',
-            templateUrl: 'app/components/Portal/MonitorManager/MonitorManager.html',
-            controller: 'MonitorManagerController',
-            stateName: 'monitorManager'
+            templateUrl: 'app/components/Portal/Monitoring/Monitoring.html',
+            controller: 'MonitoringController',
+            stateName: 'monitoring'
         })
         .state('app.portal.Reporting', {
             url: '/Reporting',

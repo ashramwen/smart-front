@@ -15,7 +15,7 @@ MyApp.constant('AUTH_EVENTS', {
     notAuthorized: 'auth-not-authorized',
 })
 
-.config(function($httpProvider, $stateProvider, $urlRouterProvider, $logProvider, $translateProvider) {
+.config(function($httpProvider, $stateProvider, $urlRouterProvider, $logProvider, $translateProvider, AUTH_EVENTS) {
 
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $logProvider.debugEnabled(false);
@@ -41,8 +41,8 @@ MyApp.constant('AUTH_EVENTS', {
             },
             responseError: function(response) {
                 MyApp.utils.whenLoaded();
-                if (response.status == 401) {
-                    //window.location = 'index.html#/app/secure/UserLogin';
+                if (response.status === 401) {
+                    window.location = '/';
                 }
                 return $q.reject(response);
             }
