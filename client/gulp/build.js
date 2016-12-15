@@ -91,5 +91,10 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(paths.src + '/css'));
 });
 
-gulp.task('dist', ['html', 'images', 'misc', 'fonts']);
+gulp.task('others', function(){
+  return gulp.src(paths.src + '/{config.js,bin/**/*}')
+    .pipe(gulp.dest(paths.dist));
+})
+
+gulp.task('dist', ['html', 'images', 'misc', 'fonts', 'others']);
 gulp.task('build',['sass','inject','partials', 'watch']);

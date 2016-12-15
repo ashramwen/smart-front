@@ -1,4 +1,7 @@
 <reporting>
+  <div class="reporting-header">
+    <div class="reporting-option" ng-click="selectOption(option)" ng-class="{[option.style]: true, 'active': option === selectedOption}" ng-repeat="option in options">{{option.text}}</div>
+  </div>
   <div gridster="gridsterOpts">
     <div ng-repeat="chart in charts | filter: displayTagFilter" gridster-item="customChartMap">
       <div class="panel">
@@ -7,6 +10,9 @@
           <!-- Kii Chart -->
           <div class="grid-content">
             <title>{{chart.name}}</title>
+            <control-container>
+              <span ng-repeat="method in chart.methods" ng-class="{'active': chart.currentMethod == method.name}" ng-click="selectMethod(chart, method)">{{method.name}}</span>
+            </control-container>
             <kii-chart 
               query="chart.options.query"
               period="chart.period"

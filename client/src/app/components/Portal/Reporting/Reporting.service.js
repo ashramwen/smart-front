@@ -71,6 +71,10 @@ angular.module('SmartPortal.Portal')
     CustomChart.prototype.setPeriod = function(period){
       this.period.setFromTime(period.from);
       this.period.setToTime(period.to);
+      if(period.interval){
+        this.period.setInterval(period.interval);
+        this.period.setUnit(period.unit);
+      }
     };
 
     CustomChart.prototype.getWidgetSetting = function(){
