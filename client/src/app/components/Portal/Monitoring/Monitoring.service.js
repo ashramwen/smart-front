@@ -2,28 +2,35 @@ angular.module('SmartPortal.Portal')
 
 .factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', 'RuleService', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, RuleService) {
     var thing = {
-        'id': 7810,
+        'id': 7174,
+        'createDate': 1481783151000,
+        'modifyDate': 1481783323000,
+        'createBy': '640',
+        'modifyBy': '2',
         'vendorThingID': '0806W-W01-O-001',
-        'kiiAppID': '493e83c9',
+        'kiiAppID': '192b49ce',
         'type': 'EnvironmentSensor',
-        'status': {
-            'date': 1481525315000,
-            'HUM': 63.2,
-            'HCHO': 0,
-            'PM25': 5,
-            'CO2': 1516,
-            'PM10': 10,
-            'CO': 0.16,
-            'TEP': 25.2,
-            'target': 'aba700e36100-011a-6e11-230c-038b629d'
-        },
-        'fullKiiThingID': '493e83c9-th.aba700e36100-011a-6e11-230c-038b629d',
+        // 'status': {
+        //     'date': 1481783380000,
+        //     'HUM': 45.7,
+        //     'HCHO': 0.01,
+        //     'PM25': 30,
+        //     'CO2': 915,
+        //     'PM10': 56,
+        //     'CO': 0.05,
+        //     'TEP': 25.5,
+        //     'target': 'th.f83120e36100-1c9a-6e11-f82c-0d891335'
+        // },
+        // 'status': [],
+        'fullKiiThingID': '192b49ce-th.f83120e36100-1c9a-6e11-f82c-0d891335',
         'schemaName': 'EnvironmentSensor',
         'schemaVersion': '1',
-        'kiiThingID': 'th.aba700e36100-011a-6e11-230c-038b629d',
-        'tags': [],
-        'globalThingID': 7810
+        'kiiThingID': 'th.f83120e36100-1c9a-6e11-f82c-0d891335',
+        'globalThingID': 7174,
+        'tags': []
     };
+
+    var monitorID = '6f7c3190-c293-11e6-a9c1-00163e02138f';
 
     var mapping = {
         'HUM': { display: 'Humidity', unit: '%', min: 0, max: 100 },
@@ -38,11 +45,10 @@ angular.module('SmartPortal.Portal')
     var dirt = ['date', 'target'];
 
     function parseStatus(statuses) {
-        if (statuses) {
-            dirt.forEach(function(o) {
-                delete statuses[o];
-            });
-        }
+        if (!statuses) return;
+        dirt.forEach(function(o) {
+            delete statuses[o];
+        });
 
         statuses = Object.keys(statuses).map(function(key, index) {
             var map = mapping[key];
@@ -60,7 +66,7 @@ angular.module('SmartPortal.Portal')
     var noticeCallback = null;
     var destination = '/topic/' + thing.kiiAppID + '/' + thing.kiiThingID;
 
-    WebSocketClient.isConnected ? subscribe() : $rootScope.$on('stomp.connected', subscribe);
+    WebSocketClient.isConnected() ? subscribe() : $rootScope.$on('stomp.connected', subscribe);
 
     function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
@@ -78,21 +84,20 @@ angular.module('SmartPortal.Portal')
     });
 
     return {
-        getThing: function(_id) {
+        getThing: function() {
             var defer = $q.defer();
-            $$Thing.get({ globalThingID: _id }).$promise.then(function(res) {
+            $$Thing.get({ globalThingID: thing.id }).$promise.then(function(res) {
                 res.status = parseStatus(res.status);
                 thing = res;
                 defer.resolve(res);
             }, function(err) {
                 console.log('get thing error:', err);
-                thing.status = parseStatus(thing.status);
                 defer.resolve(thing);
             });
             return defer.promise;
         },
-        getAlert: function(_id) {
-            return $$Monitor.get({ id: _id }).$promise;
+        getAlert: function() {
+            return $$Monitor.get({ id: monitorID }).$promise;
         },
         queryAlert: function(_name) {
             return $$Monitor.query({}, { name: thing.vendorThingID }).$promise;

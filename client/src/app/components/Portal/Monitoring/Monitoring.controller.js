@@ -2,12 +2,14 @@
 
 angular.module('SmartPortal.Portal')
 
-.controller('MonitoringController', ['$scope', '$state', '$uibModal', 'MonitorService', function($scope, $state, $uibModal, MonitorService) {
-    MonitorService.getThing(7810).then(function(res) {
+.controller('MonitoringController', ['$scope', '$uibModal', 'MonitorService', function($scope, $uibModal, MonitorService) {
+    MonitorService.getThing().then(function(res) {
         $scope.thing = res
     });
 
     // MonitorService.queryAlert();
+    // MonitorService.setAlert();
+    MonitorService.getAlert();
 
     MonitorService.onThing(function(msg) {
         // console.log(msg);
@@ -19,10 +21,7 @@ angular.module('SmartPortal.Portal')
             backdrop: 'static',
             templateUrl: 'app/components/Portal/Monitoring/Alert/Alert.html',
             controller: 'AlertController',
-            windowClass: 'center-modal app-portal-monitoring-alert',
-            resolve: {
-                thing: $scope.thing
-            }
+            windowClass: 'center-modal app-portal-monitoring-alert'
         });
 
         modalInstance.result.then(function() {
@@ -36,10 +35,7 @@ angular.module('SmartPortal.Portal')
             backdrop: 'static',
             templateUrl: 'app/components/Portal/Monitoring/History/History.html',
             controller: 'HistoryController',
-            windowClass: 'center-modal app-portal-monitoring-history',
-            resolve: {
-                thing: $scope.thing
-            }
+            windowClass: 'center-modal app-portal-monitoring-history'
         });
 
         modalInstance.result.then(function() {

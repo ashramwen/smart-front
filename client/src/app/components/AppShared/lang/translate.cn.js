@@ -24,9 +24,12 @@
         },
         "monitoring": {
             "history": "监控记录",
+            "lowerLimit": "Lower Limit",
             "save": "保存设置",
             "setalert": "警报设置",
-            "title": "监控状态"
+            "statusField": "Status Field",
+            "title": "监控状态",
+            "upperLimit": "Upper Limit"
         },
         "portalName": "CP-Demo",
         "portalNamBref": "CP-Demo",

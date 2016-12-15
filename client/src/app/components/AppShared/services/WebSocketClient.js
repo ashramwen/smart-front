@@ -5,24 +5,24 @@ angular.module('SmartPortal.AppShared')
 .factory('WebSocketClient', ['$rootScope', 'SessionService', function($rootScope, SessionService) {
     var _client = {};
     var subscriptionList = [];
-
+    var connectHeaders = {
+        'Authorization': 'Bearer ' + SessionService.getPortalAdmin().accessToken
+    };
     var init = (function() {
         _client = Stomp.client(webSocketPath);
         var connect_callback = function(frame) {
-            // console.log('Connected: ' + frame);
+            console.log('stomp connected.');
             $rootScope.$broadcast('stomp.connected');
         };
         var error_callback = function(error) {
-            console.log(error);
+            console.log('stomp error', error);
         };
-        _client.connect({
-            'Authorization': 'Bearer ' + SessionService.getPortalAdmin().accessToken
-        }, connect_callback, error_callback);
+        _client.connect(connectHeaders, connect_callback, error_callback);
         // _client.debug = angular.noop();
     })();
 
     return {
-        isConnected: (_client.connected || false),
+        isConnected: function() { return (_client.connected || false); },
         subscribe: function(destination, callback, headers) {
             if (subscriptionList.indexOf(destination) > -1) return;
             subscriptionList.push(destination);

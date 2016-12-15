@@ -85,6 +85,7 @@ window.chartsMeta = [
           "size": 0,
           "aggs": {
             "calc": {
+              "_kii_agg_field_name": "Date",
               "_kii_agg_chart": "line",
               "aggs": {
                 "CO2": {
@@ -92,6 +93,7 @@ window.chartsMeta = [
                     "field": "state.CO2"
                   },
                   "_kii_series_name": "CO2",
+                  "_kii_agg_field_name": "Density",
                   "_kii_selected": true,
                 },
                 "CO": {
@@ -201,6 +203,7 @@ window.chartsMeta = [
                   "avg": {
                     "field": "state.TEP"
                   },
+                  "_kii_agg_field_name": "Temperature",
                   "_kii_series_name": "TEP",
                   "_kii_selected": true,
                 }
@@ -322,6 +325,7 @@ window.chartsMeta = [
                     "field": "state.PM10"
                   },
                   "_kii_series_name": "PM10",
+                  "_kii_agg_field_name": "Density",
                   "_kii_selected": true,
                 },
                 "PM25": {
@@ -360,7 +364,7 @@ window.chartsMeta = [
   {
     "dataset": {
       "complex": false,
-      "name": "Humanity (°)",
+      "name": "Humanity (%)",
       "currentMethod": "avg",
       "methods": [
         {
@@ -431,6 +435,7 @@ window.chartsMeta = [
                     "field": "state.HUM"
                   },
                   "_kii_series_name": "HUM",
+                  "_kii_agg_field_name": "Humanity %",
                   "_kii_selected": true,
                 }
               },
@@ -494,6 +499,7 @@ window.chartsMeta = [
           "aggs": {
             "calc": {
               "_kii_agg_chart": "line",
+              "_kii_agg_field_name": "Temperature",
               "aggs": {
                 "CO2": {
                   "max": {
@@ -501,7 +507,7 @@ window.chartsMeta = [
                   },
                   "_kii_series_name": "CO2",
                   "_kii_selected": true,
-                  "_kii_agg_field_name": "浓度"
+                  "_kii_agg_field_name": "CO2 Density"
                 }
               },
               "histogram": {
@@ -569,16 +575,16 @@ window.chartsMeta = [
                     "field": "state.CO2"
                   },
                   "_kii_series_name": "CO2",
-                  "_kii_selected": true,
-                  "_kii_agg_field_name": "浓度"
+                  "_kii_selected": true
                 }
               },
               "range": {
                 "field": "state.CO2",
                 "ranges": [
-                  { "key": "<5000", "to": 5000 },
-                  { "key": "5000 - 6000", "from": 5000, "to": 6000 },
-                  { "key": "6000", "from": 6000 }
+                  { "key": "<200", "to": 200 },
+                  { "key": "200 - 400", "from": 200, "to": 400 },
+                  { "key": "400 - 1000", "from": 400, "to": 1000 },
+                  { "key": ">1000", "from": 1000 }
                 ]
               }
             }

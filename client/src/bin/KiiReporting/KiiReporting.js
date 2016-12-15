@@ -964,7 +964,11 @@ webpackJsonp([1,2],{
 	                series: series,
 	                dataZoom: dataZooms,
 	                tooltip: tooltip,
-	                // legend: legend.getProperties()
+	                grid: {
+	                	left: 40,
+	                	width: '90%'
+	                },
+	                legend: legend.getProperties()
 	            });
 	        }
 	        this._echartInstance.setOption(this._getEchartOptions());
@@ -1389,7 +1393,8 @@ webpackJsonp([1,2],{
 	        properties.data = _.map(properties.data, formatter);
 	        if (this._dataType == 'time') {
 	            _.extend(properties, {
-	                axisLabel: {},
+	                axisLabel: {
+	                },
 	                splitLine: {
 			                show: true
 			            },
@@ -1474,7 +1479,7 @@ webpackJsonp([1,2],{
 	            scale = false;
 	        }
 	        return {
-	            name: '',
+	            name: this.name +(this._scaleTimes==1? '' : '(unit: ' + this._scaleTimes + ')'),
 	            groupID: this.getGroupID(),
 	            axisLabel: {
 	                formatter: formatter
@@ -1539,7 +1544,7 @@ webpackJsonp([1,2],{
 	    constructor(options) {
 	        _.extend(this, options);
 	        let dataZoomOptions = {
-	            show: false,
+	            show: true,
 	            realtime: true,
 	            start: 0,
 	            end: 100,
@@ -1919,6 +1924,9 @@ webpackJsonp([1,2],{
 	        let _options = {
 	            axisPointer: {
 	                type: 'shadow'
+	            },
+	            textStyle: {
+	            	fontSize: 17
 	            }
 	        };
 	        _.extend(_options, options);
@@ -1928,7 +1936,8 @@ webpackJsonp([1,2],{
 	        return {
 	            axisPointer: this.axisPointer,
 	            trigger: this.trigger,
-	            formatter: this.formatter
+	            formatter: this.formatter,
+	            textStyle:  this.textStyle
 	        };
 	    }
 	}
@@ -2270,19 +2279,23 @@ webpackJsonp([1,2],{
 	                }
 	                else if (KiiQueryUtils_1.KiiQueryUtils._isEnumAgg(obj)) {
 	                    aggNode.type = 'category';
+                      aggNode.displayName = obj[constants_1.constants.KiiFields.AGG_FIELD_DISPLAY_NAME];
 	                    aggNode.keys = obj[constants_1.constants.ESAggregationMethods.ENUM].keys;
 	                    aggNode.aggMethod = 'enum';
 	                }
 	                else if (KiiQueryUtils_1.KiiQueryUtils._isValueAgg(obj)) {
+                      aggNode.displayName = obj[constants_1.constants.KiiFields.AGG_FIELD_DISPLAY_NAME];
 	                    aggNode.type = 'value';
 	                    aggNode.aggMethod = 'default';
 	                }
 	                else if (KiiQueryUtils_1.KiiQueryUtils._isFilterAgg(obj)) {
+                      aggNode.displayName = obj[constants_1.constants.KiiFields.AGG_FIELD_DISPLAY_NAME];
 	                    aggNode.type = 'category';
 	                    aggNode.aggMethod = 'filter';
 	                }
 	                else {
 	                    aggNode.type = 'category';
+                      aggNode.displayName = obj[constants_1.constants.KiiFields.AGG_FIELD_DISPLAY_NAME];
 	                    aggNode.aggMethod = 'default';
 	                }
 	                let aggs = KiiQueryUtils_1.KiiQueryUtils.getAggregations(obj);
@@ -2778,7 +2791,7 @@ webpackJsonp([1,2],{
 
 	"use strict";
 	exports.constants = {
-	    DATE_DISPLAY_NAME: '',
+	    DATE_DISPLAY_NAME: 'Time',
 	    KiiFields: {
 	        AGG_FIELD_DISPLAY_NAME: '_kii_agg_field_name',
 	        QUERY_PATH: '_kii_query_path',

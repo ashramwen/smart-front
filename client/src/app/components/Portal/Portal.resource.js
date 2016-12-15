@@ -157,7 +157,6 @@ angular.module('SmartPortal.Portal')
         get: {
             url: mUrl + '/:id',
             method: 'GET',
-            isArray: true,
             params: {
                 id: '@id'
             }

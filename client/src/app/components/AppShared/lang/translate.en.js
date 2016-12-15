@@ -24,9 +24,12 @@
         },
         "monitoring": {
             "history": "Alert History",
+            "lowerLimit": "Lower Limit",
             "save": "Save",
             "setalert": "Alert Setting",
-            "title": "Status"
+            "statusField": "Status Field",
+            "title": "Status",
+            "upperLimit": "Upper Limit"
         },
         "portalName": "CP-Demo",
         "portalNamBref": "CP-Demo",
