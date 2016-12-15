@@ -1,0 +1,22 @@
+<i class="fa fa-times" aria-hidden="true" ng-click="close()"></i>
+<div class="modal-header">
+  <h3 class="modal-title">{{'monitoring.alert.set' | translate}}</h3>
+</div>
+<div class="modal-body">
+  <div class="head clearfix">
+    <div class="clearfix">
+      <div class="title lower pull-left">Lower Limit</div>
+      <div class="title pull-left">Status Field</div>
+      <div class="title upper pull-left">Upper Limit</div>
+    </div>
+    <div class="line"></div>
+    <i class="fa fa-plus-circle fa-2x pull-right" aria-hidden="true"></i>
+  </div>
+
+  <table>
+    <tr ng-repeat="r in rules"></tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-orange" ng-click="close()">{{'controls.create' | translate}}</button>
+</div>

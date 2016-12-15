@@ -1,0 +1,107 @@
+@import 'src/app/components/AppShared/scss/global.scss';
+.app-portal-monitoring-alert {
+    .head {
+        .title {
+            width: 160px;
+            color: #4e5a5c;
+            text-align: center;
+            &.lower {
+                color: #4e8ab8;
+                text-align: left;
+            }
+            &.upper {
+                color: #ef7431;
+                text-align: right;
+            }
+        }
+        .line {
+            margin-top: 8px;
+            height: 1px;
+            width: 480px;
+            @include bg-linear-gradient((left, #4e8ab7 0%, #ef7431 100%));
+        }
+        .fa-plus-circle {
+            margin-top: -16px;
+            color: #57c6e6;
+        }
+    }
+    table {
+        margin: 0 auto;
+    }
+}
+
+.center-modal {
+    position: fixed;
+    top: 30%;
+    left: 18.5%;
+    margin-left: -10%;
+    .modal-content {
+        border: solid 6px rgba(249, 198, 108, .4);
+        @include border-radius(6px);
+        @include box-shadow((3px 4px 16px rgba(9, 27, 46, .75), inset 0 0 6px rgba(255, 255, 255, .3)));
+        .modal-header {
+            position: relative;
+            color: #fff;
+            top: -26px;
+            text-align: center;
+            border: none;
+            &::before {
+                content: ' ';
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 467px;
+                height: 29px;
+                margin: 0 auto;
+                background-color: #00a1cf;
+                transform: perspective(467px) rotateX(40deg);
+            }
+            &::after {
+                content: ' ';
+                position: absolute;
+                display: block;
+                top: 2px;
+                left: 0;
+                right: 0;
+                width: 445px;
+                height: 69px;
+                margin: 0 auto;
+                background-color: #57c6e6;
+                transform: perspective(445px) rotateX(-20deg);
+            }
+            >h3 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                margin: 0 auto;
+                font-size: 32px;
+                height: 69px;
+                line-height: 69px;
+            }
+        }
+        .modal-body {
+            position: relative;
+            margin-top: 30px;
+            padding-left: 45px;
+            padding-right: 25px;
+        }
+        .modal-footer {
+            position: relative;
+            border: none;
+            text-align: center;
+            .btn-orange {
+                width: 306px;
+                height: 46px;
+                line-height: 30px;
+                font-size: 28px;
+                color: #fff;
+                background-color: #ef7431;
+                @include border-radius(4px);
+            }
+        }
+    }
+}
