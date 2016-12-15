@@ -9,7 +9,7 @@ angular.module('SmartPortal.AppShared')
     var init = (function() {
         _client = Stomp.client(webSocketPath);
         var connect_callback = function(frame) {
-            // console.log('Connected: ' + frame);
+            console.log('stomp.connected');
             $rootScope.$broadcast('stomp.connected');
         };
         var error_callback = function(error) {
