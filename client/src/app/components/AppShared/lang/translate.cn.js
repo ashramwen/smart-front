@@ -23,16 +23,9 @@
             "back": "返回"
         },
         "monitoring": {
-            "alert": {
-                "alertOption": "参数项",
-                "alertType": "条件类型",
-                "alertValue": "值域",
-                "history": "监控记录",
-                "isRead": "已读",
-                "readAll": "全部为已读",
-                "set": "警报设置"
-            },
+            "history": "监控记录",
             "save": "保存设置",
+            "setalert": "警报设置",
             "title": "监控状态"
         },
         "portalName": "CP-Demo",

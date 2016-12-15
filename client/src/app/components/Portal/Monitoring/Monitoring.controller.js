@@ -7,13 +7,13 @@ angular.module('SmartPortal.Portal')
         $scope.thing = res
     });
 
-    MonitorService.queryAlert();
+    // MonitorService.queryAlert();
 
     MonitorService.onThing(function(msg) {
         // console.log(msg);
     });
 
-    $scope.set = function() {
+    $scope.setAlert = function() {
         var modalInstance = $uibModal.open({
             animation: true,
             backdrop: 'static',
@@ -29,4 +29,21 @@ angular.module('SmartPortal.Portal')
 
         });
     };
+
+    $scope.history = function() {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: 'app/components/Portal/Monitoring/History/History.html',
+            controller: 'HistoryController',
+            windowClass: 'center-modal app-portal-monitoring-history',
+            resolve: {
+                thing: $scope.thing
+            }
+        });
+
+        modalInstance.result.then(function() {
+
+        });
+    }
 }]);

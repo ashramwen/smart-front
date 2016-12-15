@@ -3,11 +3,11 @@
     <div class="row header">
       <div class="title pull-left">{{'monitoring.title' | translate}}</div>
       <div class="func-group pull-right">
-        <button class="btn btn-monitor" ng-click="set()">
-          <img src="images/icon_set.png" width="20" height="19" alt=""> {{'monitoring.alert.set' | translate}}
+        <button class="btn btn-monitor" ng-click="setAlert()">
+          <img src="images/icon_set.png" width="20" height="19" alt=""> {{'monitoring.setalert' | translate}}
         </button>
-        <button class="btn btn-monitor">
-          <img src="images/icon_history.png" width="28" height="19" alt=""> {{'monitoring.alert.history' | translate}}
+        <button class="btn btn-monitor" ng-click="history()">
+          <img src="images/icon_history.png" width="28" height="19" alt=""> {{'monitoring.history' | translate}}
         </button>
       </div>
     </div>
@@ -32,31 +32,3 @@
     </div>
   </div>
 </div>
-
-
-<script type="text/ng-template" id="app-portal-monitormanager-setalert">
-  <div class="app-portal-monitormanager-setalert">
-    <i class="fa fa-times" aria-hidden="true" ng-click="close()"></i>
-    <div class="modal-header">
-      <h3 class="modal-title">{{'monitoring.alert.set' | translate}}</h3>
-    </div>
-    <div class="modal-body">
-      <div class="head clearfix">
-        <div class="clearfix">
-          <div class="title lower pull-left">Lower Limit</div>
-          <div class="title pull-left">Status Field</div>
-          <div class="title upper pull-left">Upper Limit</div>
-        </div>
-        <div class="line"></div>
-        <i class="fa fa-plus-circle fa-2x pull-right" aria-hidden="true"></i>
-      </div>
-
-      <table>
-        <tr ng-repeat="r in rules"></tr>
-      </table>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-rule" ng-click="close()">{{'controls.create' | translate}}</button>
-    </div>
-  </div>
-</script>
