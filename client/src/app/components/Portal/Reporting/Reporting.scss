@@ -1,10 +1,60 @@
 reporting{
+  .reporting-header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: #fff;
+    height: 38px;
+    margin-left: 225px;
+    padding-right: 225px;
+    display: flex;
+    z-index: 2;
+
+    .reporting-option{
+      flex: 1;
+      height: 100%;
+      line-height: 38px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+      color: #fff;
+      &:hover, &.active{
+        height: 200%;
+        line-height: 76px;
+        border-bottom: 5px solid #ff992d;
+      }
+      &.a{
+        background-color: #7da2d1;
+      }
+      &.b{
+        background-color: #8ea1bf;
+      }
+      &.c{
+        background-color: #8d95b0;
+      }
+      &.d{
+        background-color: #a18c96;
+      }
+      &.e{
+        background-color: #b3978f;
+      }
+      &.f{
+        background-color: #bf9886;
+      }
+      &.g{
+        background-color: #c29278;
+      }
+    }
+  }
   .gridster-mobile{
     .gridster-item{
       height: 300px;
     }
   }
   .gridster{
+    position: relative;
+    z-index: 1;
     margin-left: -10px;
     margin-right: -10px;
     .gridster-item{
@@ -40,7 +90,7 @@ reporting{
         }
         .panel-body{
           transition: all 0.3s;
-          overflow: auto;
+          overflow: hidden;
           height: 100%;
           margin-top: 0px;
           position: relative;
@@ -62,11 +112,29 @@ reporting{
               font-weight: bold;
               font-family: -webkit-pictograph;
             }
+            control-container{
+              display: block;
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              z-index: 2;
+              span{
+                padding: 3px 6px;
+                background-color: green;
+                font-size: 13px;
+                margin-right: 10px;
+                cursor: pointer;
+                &.active{
+                  background-color: red;
+                }
+              }
+            }
             kii-chart{
               height: 120% !important;
               width: 110% !important;
               margin-top: -30px;
               margin-left: -3%;
+              z-index: 1;
             }
           }
         }
