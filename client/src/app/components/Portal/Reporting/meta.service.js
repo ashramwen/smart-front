@@ -59,7 +59,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -73,7 +73,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -171,7 +171,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -185,7 +185,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -292,7 +292,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -306,7 +306,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -402,7 +402,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -416,7 +416,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -472,7 +472,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -486,7 +486,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -542,7 +542,7 @@ window.chartsMeta = [
         "level": 0,
         "query": {
           "_kii_agg_name": "电量损耗",
-          "_kii_query_path": "/493e83c9/_search",
+          "_kii_query_path": "/192b49ce/_search",
           "query": {
             "filtered": {
               "query": {
@@ -556,7 +556,7 @@ window.chartsMeta = [
                   "must": [
                     {
                       "terms": {
-                        "state.target": ["th.aba700e36100-011a-6e11-230c-038b629d"]
+                        "state.target": ["th.f83120e36100-1c9a-6e11-f82c-0d891335"]
                       }
                     }
                   ],
@@ -581,10 +581,10 @@ window.chartsMeta = [
               "range": {
                 "field": "state.CO2",
                 "ranges": [
-                  { "key": "<200", "to": 200 },
-                  { "key": "200 - 400", "from": 200, "to": 400 },
-                  { "key": "400 - 1000", "from": 400, "to": 1000 },
-                  { "key": ">1000", "from": 1000 }
+                  { "key": "<400", "to": 400 },
+                  { "key": "400～500", "from": 400, "to": 500 },
+                  { "key": "500～600", "from": 500, "to": 600 },
+                  { "key": ">600", "from": 600 }
                 ]
               }
             }
