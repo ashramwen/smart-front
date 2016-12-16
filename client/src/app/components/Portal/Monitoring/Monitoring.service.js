@@ -21,11 +21,11 @@ angular.module('SmartPortal.Portal')
     var monitorID = '6f7c3190-c293-11e6-a9c1-00163e02138f';
 
     var monitor = {
-        "monitorID": "6f7c3190-c293-11e6-a9c1-00163e02138f",
-        "name": "0806W-W01-O-001",
-        "things": ["0806W-W01-O-001"],
-        "enable": true,
-        "additions": {}
+        'monitorID': '6f7c3190-c293-11e6-a9c1-00163e02138f',
+        'name': 'CP-Demo Monitor',
+        'things': ['0806W-W01-O-001'],
+        'enable': true,
+        'additions': {}
     };
 
     var mapping = {
@@ -100,15 +100,26 @@ angular.module('SmartPortal.Portal')
                 _clauses.push({
                     type: 'range',
                     field: status.name,
-                    upperLimit: status.lower
+                    upperLimit: status.upper
                 });
             }
         });
-        if(!_clauses.length) return;
+        if (!_clauses.length) return;
         return {
             type: 'or',
             clauses: _clauses
         };
+    }
+
+    function parseCondition(res) {
+        if (!res.condition) return;
+        monitor.condition = res.condition;
+        if (!res.condition.clauses) return;
+        res.condition.clauses.forEach(function(clause) {
+            if (!thing.status[clause.field]) return;
+            clause.lowerLimit && (thing.status[clause.field].lower = clause.lowerLimit);
+            clause.upperLimit && (thing.status[clause.field].upper = clause.upperLimit);
+        });
     }
 
     $rootScope.$on('$destroy', function() {
@@ -136,7 +147,8 @@ angular.module('SmartPortal.Portal')
         getMonitor: function() {
             var defer = $q.defer();
             $$Monitor.get({ id: monitor.monitorID }).$promise.then(function(res) {
-                console.log(res);
+                parseCondition(res);
+                defer.resolve(monitor);
             });
             return defer.promise;
         },
@@ -144,13 +156,8 @@ angular.module('SmartPortal.Portal')
             return $$Monitor.query({}, { name: thing.vendorThingID }).$promise;
         },
         setMonitor: function() {
-            var _data = {
-                name: thing.vendorThingID,
-                things: [thing.vendorThingID],
-                enable: true,
-                condition: genCondition()
-            };
-            return $$Monitor.update({ id: monitor.monitorID }, _data).$promise;
+            monitor.condition = genCondition();
+            return $$Monitor.update({ id: monitor.monitorID }, monitor).$promise;
         },
         getHistory: function() {},
         getCount: function() {},

@@ -23,11 +23,14 @@
             "back": "Back"
         },
         "monitoring": {
+            "alertTime": "Alert Time",
             "history": "Alert History",
             "lowerLimit": "Lower Limit",
+            "range": "Operating range: {{min}} ~ {{max}}",
             "save": "Save",
             "setalert": "Alert Setting",
             "statusField": "Status Field",
+            "statusValue": "Status Value",
             "title": "Status",
             "upperLimit": "Upper Limit"
         },

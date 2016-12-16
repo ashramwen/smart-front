@@ -24,12 +24,17 @@
                 color: #ef7431;
             }
         }
-        div {
+        .name {
             text-align: center;
             margin-left: 12px;
             width: 150px;
             border: 1px solid #c3cace;
             @include border-radius(18px);
+            .fa-info-circle {
+                float: right;
+                margin-top: 10px;
+                margin-right: 10px;
+            }
         }
         .fa-minus-circle {
             color: #ff7182;

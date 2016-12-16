@@ -25,6 +25,7 @@
         "monitoring": {
             "history": "监控记录",
             "lowerLimit": "Lower Limit",
+            "range": "Operating range: {{min}} ~ {{max}}",
             "save": "保存设置",
             "setalert": "警报设置",
             "statusField": "Status Field",
