@@ -23,12 +23,14 @@
             "back": "返回"
         },
         "monitoring": {
+            "alertTime": "Alert Time",
             "history": "监控记录",
             "lowerLimit": "Lower Limit",
             "range": "Operating range: {{min}} ~ {{max}}",
             "save": "保存设置",
             "setalert": "警报设置",
             "statusField": "Status Field",
+            "statusValue": "Status Value",
             "title": "监控状态",
             "upperLimit": "Upper Limit"
         },

@@ -10,11 +10,8 @@ angular.module('SmartPortal.Portal')
     $scope.monitor = data.monitor;
 
     $scope.reset = function(status) {
-        console.log(status);
-        console.log($scope.status);
-        // status.lower = null;
-        // status.upper = null;
-        // console.log($scope.status);
+        status.lower = null;
+        status.upper = null;
     }
 
     $scope.change = function(s) {

@@ -1,6 +1,6 @@
 angular.module('SmartPortal.Portal')
 
-.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor) {
+.factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', '$$Notice', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, $$Notice) {
     var thing = {
         'id': 7174,
         'createDate': 1481783151000,
@@ -159,8 +159,12 @@ angular.module('SmartPortal.Portal')
             monitor.condition = genCondition();
             return $$Monitor.update({ id: monitor.monitorID }, monitor).$promise;
         },
-        getHistory: function() {},
-        getCount: function() {},
+        getNotice: function() {
+            return $$Notice.query({}, { from: monitor.name }).$promise;
+        },
+        count: function() {
+            return $$Notice.queryCount({}, { from: monitor.name }).$promise;
+        },
         onThing: function(callback) {
             thingCallback = callback;
         },
