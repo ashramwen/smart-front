@@ -75,7 +75,7 @@ angular.module('SmartPortal.Portal')
 
     function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
-            // console.log('websocket:', msg.state);
+            console.log('websocket:', msg.state);
             updateStatus(msg.state);
             thingCallback && thingCallback.apply(this, [thing]);
         });
