@@ -1431,15 +1431,15 @@ webpackJsonp([1,2],{
 	class YAxis extends _axis_1._axis {
 	    constructor(options) {
 	        let _options = {
-	            minInterval: 1,
+	            minInterval: 0.1,
 	            type: 'value',
+	            splitNumber: 10,
 	            splitLine: {
 	                show: true
 	            },
-	            splitNumber: 5,
 	            axisLabel: {
 	                formatter: (value, index) => {
-	                    return value / this._scaleTimes;
+	                    return value;
 	                }
 	            },
 	            axisTick: {
@@ -1455,6 +1455,7 @@ webpackJsonp([1,2],{
 	        this.dataZoom.show = false;
 	        this._dataset = this._dataset || [];
 	        this._seriesGroups = [];
+	        this._scaleTimes = 1;
 	    }
 	    setGroupID(groupID) {
 	        this._groupID = groupID;
@@ -1463,7 +1464,7 @@ webpackJsonp([1,2],{
 	        return this._groupID;
 	    }
 	    refresh() {
-	        this._scale();
+	        //this._scale();
 	    }
 	    addSeriesGroup(s) {
 	        if (this._seriesGroups.indexOf(s) < 0)
@@ -1472,7 +1473,7 @@ webpackJsonp([1,2],{
 	    _getProperties() {
 	        let _that = this;
 	        let formatter = function (value) {
-	            return (value / _that._scaleTimes) | 0;
+	            return (value / _that._scaleTimes);
 	        };
 	        let scale = this.scale;
 	        if (this._seriesGroups.length > 0 && this._seriesGroups[0] instanceof SeriesGroup_1.BarSeriesGroup) {
@@ -1485,6 +1486,7 @@ webpackJsonp([1,2],{
 	                formatter: formatter
 	            },
 	            splitNumber: 5,
+	            minInterval: 0.1,
 	            scale: scale,
 	            axisTick: {
 	            	show: false,
