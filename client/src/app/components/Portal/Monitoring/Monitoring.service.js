@@ -180,8 +180,8 @@ angular.module('SmartPortal.Portal')
             monitor.condition = genCondition();
             return $$Monitor.update({ id: monitor.monitorID }, monitor).$promise;
         },
-        getNotice: function(_data) {
-            return $$Notice.query({}, _data).$promise;
+        getNotice: function(queryString, _data) {
+            return $$Notice.query(queryString, _data).$promise;
         },
         count: function() {
             return $$Notice.queryCount({}, { from: monitor.name }).$promise;
