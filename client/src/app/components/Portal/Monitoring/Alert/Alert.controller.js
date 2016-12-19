@@ -4,18 +4,14 @@ angular.module('SmartPortal.Portal')
 
 
 .controller('AlertController', ['$scope', '$uibModalInstance', 'MonitorService', function($scope, $uibModalInstance, MonitorService) {
-    var data = MonitorService.get();
+    var data = MonitorService.data();
 
     $scope.status = data.thing.status;
     $scope.monitor = data.monitor;
 
     $scope.reset = function(status) {
-        status.lower = null;
-        status.upper = null;
-    }
-
-    $scope.change = function(s) {
-        var a = 1;
+        status.lower = undefined;
+        status.upper = undefined;
     }
 
     $scope.update = function() {

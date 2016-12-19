@@ -5,11 +5,11 @@ angular.module('SmartPortal.Portal')
 .controller('MonitoringController', ['$scope', '$uibModal', 'MonitorService', function($scope, $uibModal, MonitorService) {
     MonitorService.getThing().then(function(res) {
         $scope.thing = res
+        MonitorService.getMonitor();
     });
 
     // MonitorService.queryMonitor();
     // MonitorService.setMonitor();
-    MonitorService.getMonitor();
 
     MonitorService.onThing(function(msg) {
         // console.log(msg);

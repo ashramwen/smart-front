@@ -23,8 +23,10 @@
             "back": "返回"
         },
         "monitoring": {
+            "alerting": "Alerting",
             "alertTime": "Alert Time",
             "history": "监控记录",
+            "notice": "",
             "lowerLimit": "Lower Limit",
             "range": "Operating range: {{min}} ~ {{max}}",
             "save": "保存设置",

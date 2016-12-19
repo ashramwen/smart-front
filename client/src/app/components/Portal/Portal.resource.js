@@ -238,8 +238,7 @@ angular.module('SmartPortal.Portal')
         },
         queryCount: {
             url: _url + '/countQuery',
-            method: 'POST',
-            isArray: true
+            method: 'POST'
         },
         enable: {
             url: _url + '/:id/enable',

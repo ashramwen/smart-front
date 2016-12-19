@@ -10,6 +10,7 @@ angular.module('SmartPortal.Portal')
         'vendorThingID': '0806W-W01-O-001',
         'kiiAppID': '192b49ce',
         'type': 'EnvironmentSensor',
+        'status': {},
         'fullKiiThingID': '192b49ce-th.f83120e36100-1c9a-6e11-f82c-0d891335',
         'schemaName': 'EnvironmentSensor',
         'schemaVersion': '1',
@@ -59,11 +60,14 @@ angular.module('SmartPortal.Portal')
         }
     }
 
-    // from websocket
+    // get msg from websocket
     function updateStatus(statuses) {
+        var status;
         for (var key in statuses) {
             if (!statuses.hasOwnProperty(key) || !thing.status.hasOwnProperty(key)) continue;
-            thing.status[key].value = statuses[key];
+            status = thing.status[key];
+            status.value = statuses[key];
+            status.warn = (status.value <= status.lower || status.value >= status.upper);
         }
     }
 
@@ -75,8 +79,9 @@ angular.module('SmartPortal.Portal')
 
     function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
-            console.log('websocket:', msg.state);
+            // console.log('websocket:', msg.state);
             updateStatus(msg.state);
+            checkStatus();
             thingCallback && thingCallback.apply(this, [thing]);
         });
         WebSocketClient.subscribe('/socket/users/notices', function(res) {
@@ -85,6 +90,7 @@ angular.module('SmartPortal.Portal')
         });
     }
 
+    // update monitor
     function genCondition() {
         var _clauses = [];
         Object.keys(thing.status).forEach(function(key) {
@@ -111,15 +117,29 @@ angular.module('SmartPortal.Portal')
         };
     }
 
+    // get monitor
     function parseCondition(res) {
         if (!res.condition) return;
         monitor.condition = res.condition;
         if (!res.condition.clauses) return;
+        var status;
         res.condition.clauses.forEach(function(clause) {
-            if (!thing.status[clause.field]) return;
-            clause.lowerLimit && (thing.status[clause.field].lower = clause.lowerLimit);
-            clause.upperLimit && (thing.status[clause.field].upper = clause.upperLimit);
+            status = thing.status[clause.field];
+            if (!status) return;
+            clause.lowerLimit && (status.lower = clause.lowerLimit);
+            clause.upperLimit && (status.upper = clause.upperLimit);
+            status.warn = (status.value <= status.lower || status.value >= status.upper);
         });
+    }
+
+    // show/hide notice on the top of portal
+    function checkStatus() {
+        var status;
+        $rootScope.notice = undefined;
+        for (var key in thing.status) {
+            status = thing.status[key];
+            status.warn && ($rootScope.notice = status);
+        }
     }
 
     $rootScope.$on('$destroy', function() {
@@ -127,7 +147,7 @@ angular.module('SmartPortal.Portal')
     });
 
     return {
-        get: function() {
+        data: function() {
             return {
                 thing: thing,
                 monitor: monitor
@@ -148,6 +168,7 @@ angular.module('SmartPortal.Portal')
             var defer = $q.defer();
             $$Monitor.get({ id: monitor.monitorID }).$promise.then(function(res) {
                 parseCondition(res);
+                checkStatus();
                 defer.resolve(monitor);
             });
             return defer.promise;
@@ -159,8 +180,8 @@ angular.module('SmartPortal.Portal')
             monitor.condition = genCondition();
             return $$Monitor.update({ id: monitor.monitorID }, monitor).$promise;
         },
-        getNotice: function() {
-            return $$Notice.query({}, { from: monitor.name }).$promise;
+        getNotice: function(_data) {
+            return $$Notice.query({}, _data).$promise;
         },
         count: function() {
             return $$Notice.queryCount({}, { from: monitor.name }).$promise;

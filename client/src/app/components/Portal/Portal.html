@@ -34,6 +34,7 @@
 
         <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side shrink">
+            <div class="notice" ng-class="{'active':notice}"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.notice' | translate:{display:notice.display, value:notice.value} }}</div>
             <!-- Main content -->
             <section class="content">
                 <div class="row portal-row" ng-if="$state.current.description && $state.current.description!=''")>

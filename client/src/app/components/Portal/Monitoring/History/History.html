@@ -4,19 +4,32 @@
   <h3 class="modal-title">{{'monitoring.history' | translate}}</h3>
 </div>
 
-<div class="modal-body">
+<div class="modal-body" ng-init="init()">
   <div class="head clearfix">
     <div class="clearfix">
-      <div class="title lower pull-left">{{'monitoring.statusField' | translate}}</div>
-      <div class="title pull-left">{{'monitoring.statusValue' | translate}}</div>
-      <div class="title upper pull-left">{{'monitoring.alertTime' | translate}}</div>
+      <div class="title status-blue pull-left">{{'monitoring.statusField' | translate}}</div>
+      <div class="title status-orange center pull-left">{{'monitoring.statusValue' | translate}}</div>
+      <div class="title right pull-left">{{'monitoring.alertTime' | translate}}</div>
     </div>
     <div class="line"></div>
   </div>
 
-  <table>
-    <tr ng-repeat="r in rules"></tr>
-  </table>
+  <ul class="notice">
+    <li class="clearfix" ng-repeat="n in notices track by $index" ng-click="collapse(n, $index)" ng-class="{'pointer': n.status.length > 1}">
+      <div class="clearfix">
+        <div class="title status-blue pull-left"><i class="fa fa-caret-down" aria-hidden="true" ng-if="n.status.length > 1"></i> {{n.status[0].display}}</div>
+        <div class="title status-orange center pull-left">{{n.status[0].value}}</div>
+        <div class="title right pull-left">{{n.date | date:"yyyy-MM-dd hh:mm" }}</div>
+      </div>
+      <div class="collapse" uib-collapse="!n.isCollapsed" ng-if="n.status.length > 1" style="height:0">
+        <div class="clearfix" ng-repeat="s in n.status track by s.name" ng-if="$index !== 0">
+          <div class="title status-blue collapse-name pull-left">{{s.display}}</div>
+          <div class="title status-orange center pull-left">{{s.value}}</div>
+          <div class="title pull-left"></div>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <div class="modal-footer">
