@@ -204,7 +204,7 @@ window.chartsMeta = [
                     "field": "state.TEP"
                   },
                   "_kii_agg_field_name": "Temperature",
-                  "_kii_series_name": "TEP",
+                  "_kii_series_name": "Temperature ℃",
                   "_kii_selected": true,
                 }
               },
@@ -332,7 +332,7 @@ window.chartsMeta = [
                   "avg": {
                     "field": "state.PM25"
                   },
-                  "_kii_series_name": "PM25",
+                  "_kii_series_name": "PM2.5",
                   "_kii_selected": true,
                 }
               },
@@ -360,11 +360,11 @@ window.chartsMeta = [
       }
     }
   },
-  // HUMANITY
+  // HUMidITY
   {
     "dataset": {
       "complex": false,
-      "name": "Humanity (%)",
+      "name": "Humidity (%)",
       "currentMethod": "avg",
       "methods": [
         {
@@ -434,8 +434,8 @@ window.chartsMeta = [
                   "avg": {
                     "field": "state.HUM"
                   },
-                  "_kii_series_name": "HUM",
-                  "_kii_agg_field_name": "Humanity %",
+                  "_kii_series_name": "Humidity %",
+                  "_kii_agg_field_name": "Humidity %",
                   "_kii_selected": true,
                 }
               },
