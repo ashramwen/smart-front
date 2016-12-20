@@ -55,15 +55,15 @@ angular.module('SmartPortal.Portal')
             var _status = [];
 
             for (var key in currStatus) {
-                var clause = clauses.find(function(o) { return o.field === key; });
+                var clause = clauses.find(function(o) {
+                    return (o.field === key) && (currStatus[key] >= o.lowerLimit || currStatus[key] <= o.upperLimit);
+                });
                 if (!clause) continue;
-                if (currStatus[key] <= clause.lowerLimit || currStatus[key] >= clause.upperLimit) {
-                    _status.push({
-                        name: key,
-                        display: data.thing.status[key].display,
-                        value: currStatus[key]
-                    });
-                }
+                _status.push({
+                    name: key,
+                    display: data.thing.status[key].display,
+                    value: currStatus[key]
+                });
             }
 
             if (_status.length) {

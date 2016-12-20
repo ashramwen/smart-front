@@ -15,9 +15,9 @@
   </div>
 
   <div ng-repeat="s in status track by s.name" class="rule clearfix">
-    <input type="number" class="status-blue pull-left" ng-model="s.lower">
+    <input type="number" class="status-blue pull-left" ng-model="s.upper">
     <div class="name pull-left">{{s.display}} <i class="fa fa-info-circle" aria-hidden="true" uib-tooltip="{{'monitoring.range' | translate:{min: s.min, max: s.max} }}"></i></div>
-    <input type="number" class="status-orange pull-left" ng-model="s.upper">
+    <input type="number" class="status-orange pull-left" ng-model="s.lower">
     <i class="fa fa-minus-circle fa-2x" aria-hidden="true" ng-click="reset(s)"></i>
     <!--<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>-->
   </div>

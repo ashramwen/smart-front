@@ -128,7 +128,7 @@ angular.module('SmartPortal.Portal')
             if (!status) return;
             clause.lowerLimit && (status.lower = clause.lowerLimit);
             clause.upperLimit && (status.upper = clause.upperLimit);
-            status.warn = (status.value <= status.lower || status.value >= status.upper);
+            status.warn = (status.value >= status.lower || status.value <= status.upper);
         });
     }
 
@@ -138,7 +138,7 @@ angular.module('SmartPortal.Portal')
         $rootScope.notice = undefined;
         for (var key in thing.status) {
             status = thing.status[key];
-            status.warn = (status.value <= status.lower || status.value >= status.upper);
+            status.warn = (status.value >= status.lower || status.value <= status.upper);
             status.warn && ($rootScope.notice = status);
         }
     }
@@ -217,7 +217,7 @@ angular.module('SmartPortal.Portal')
             return $$Monitor.delete({ id: monitor.monitorID }).$promise;
         },
         getNotice: function(queryString) {
-            return $$Notice.query(queryString, { from: monitor.name, actionType: 'true2false' }).$promise;
+            return $$Notice.query(queryString, { from: monitor.name, actionType: 'false2true' }).$promise;
         },
         count: function() {
             return $$Notice.queryCount({}, { from: monitor.name }).$promise;

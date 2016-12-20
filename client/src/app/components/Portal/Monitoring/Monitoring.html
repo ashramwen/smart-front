@@ -23,10 +23,10 @@
         <div class="body">{{s.value}}</div>
         <div class="foot">
           <!--<div class="icon lower pull-left">{{s.min}}</div>-->
-          <div class="icon lower pull-left" ng-if="s.lower">{{s.lower}}</div>
+          <div class="icon lower pull-left" ng-if="s.upper">{{s.upper}}</div>
           <div class="foot-line pull-left"></div>
           <!--<div class="icon upper pull-right">{{s.max}}</div>-->
-          <div class="icon upper pull-right" ng-if="s.upper">{{s.upper}}</div>
+          <div class="icon upper pull-right" ng-if="s.lower">{{s.lower}}</div>
         </div>
       </div>
       <!-- END card -->
