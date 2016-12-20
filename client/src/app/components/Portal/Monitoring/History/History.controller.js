@@ -24,7 +24,7 @@ angular.module('SmartPortal.Portal')
 
     $scope.pageChanged = function(currentPage) {
         $scope.currentPage = currentPage;
-        console.log('Page changed to: ' + $scope.currentPage);
+        // console.log('Page changed to: ' + $scope.currentPage);
         getNotices();
     };
 
@@ -74,7 +74,7 @@ angular.module('SmartPortal.Portal')
                 })
             }
         });
-        console.log($scope.notices);
+        // console.log($scope.notices);
 
         // for test
         // for (var i = 0; i < 10; i++) {
