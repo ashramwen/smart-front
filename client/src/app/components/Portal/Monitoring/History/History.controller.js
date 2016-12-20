@@ -35,7 +35,7 @@ angular.module('SmartPortal.Portal')
     function getNotices() {
         $scope.notices = [];
         var _pager = ($scope.current - 1) * 10 + '/10';
-        MonitorService.getNotice({ pager: _pager }, { from: data.monitor.name, actionType: 'false2true' }).then(function(res) {
+        MonitorService.getNotice({ pager: _pager }).then(function(res) {
             parseAlerts(res);
         });
 
@@ -46,8 +46,8 @@ angular.module('SmartPortal.Portal')
     }
 
     function parseAlerts(alerts) {
-
-        $scope.notices = alerts.map(function(alert) {
+        $scope.notices = [];
+        alerts.forEach(function(alert) {
             var monitor = alert.data.monitor;
             var clauses = monitor.condition.clauses;
             var currStatus = alert.data.currStatus;
@@ -57,7 +57,7 @@ angular.module('SmartPortal.Portal')
             for (var key in currStatus) {
                 var clause = clauses.find(function(o) { return o.field === key; });
                 if (!clause) continue;
-                if (currStatus[key] <= clause.lowerLimit || currStatus[key] >= clause.lowerLimit) {
+                if (currStatus[key] <= clause.lowerLimit || currStatus[key] >= clause.upperLimit) {
                     _status.push({
                         name: key,
                         display: data.thing.status[key].display,
@@ -66,11 +66,14 @@ angular.module('SmartPortal.Portal')
                 }
             }
 
-            return {
-                date: currStatus.date,
-                status: _status
+            if (_status.length) {
+                $scope.notices.push({
+                    date: currStatus.date,
+                    status: _status
+                })
             }
         });
+        console.log($scope.notices);
 
         // for test
         // for (var i = 0; i < 10; i++) {

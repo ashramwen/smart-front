@@ -1,6 +1,7 @@
 angular.module('SmartPortal.Portal')
 
 .factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', '$$Notice', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, $$Notice) {
+    var monitorName = 'CP-Demo Monitor';
     var thing = {
         'id': 7174,
         'createDate': 1481783151000,
@@ -19,10 +20,8 @@ angular.module('SmartPortal.Portal')
         'tags': []
     };
 
-    var monitorID = '6f7c3190-c293-11e6-a9c1-00163e02138f';
-
-    var monitor = {
-        'monitorID': '6f7c3190-c293-11e6-a9c1-00163e02138f',
+    var monitor = {};
+    var emptyMonitor = {
         'name': 'CP-Demo Monitor',
         'things': ['0806W-W01-O-001'],
         'enable': true,
@@ -119,6 +118,7 @@ angular.module('SmartPortal.Portal')
 
     // get monitor
     function parseCondition(res) {
+        monitor = res;
         if (!res.condition) return;
         monitor.condition = res.condition;
         if (!res.condition.clauses) return;
@@ -138,6 +138,7 @@ angular.module('SmartPortal.Portal')
         $rootScope.notice = undefined;
         for (var key in thing.status) {
             status = thing.status[key];
+            status.warn = (status.value <= status.lower || status.value >= status.upper);
             status.warn && ($rootScope.notice = status);
         }
     }
@@ -146,7 +147,7 @@ angular.module('SmartPortal.Portal')
         WebSocketClient.unsubscribeAll();
     });
 
-    return {
+    var MonitorService = {
         data: function() {
             return {
                 thing: thing,
@@ -174,14 +175,49 @@ angular.module('SmartPortal.Portal')
             return defer.promise;
         },
         queryMonitor: function(_name) {
-            return $$Monitor.query({}, { name: thing.vendorThingID }).$promise;
+            var defer = $q.defer();
+            $$Monitor.query({}, { name: monitorName }).$promise.then(function(res) {
+                if (res.length > 0) {
+                    parseCondition(res[0]);
+                    checkStatus();
+                    defer.resolve(monitor);
+                } else {
+                    MonitorService.addMonitor().then(function(res) {
+                        monitor = angular.copy(emptyMonitor);
+                        monitor.monitorID = res.monitorID;
+                        defer.resolve(monitor);
+                    });
+                }
+            });
+            return defer.promise;
+        },
+        addMonitor: function() {
+            return $$Monitor.add(emptyMonitor).$promise;
         },
         setMonitor: function() {
+            var defer = $q.defer();
             monitor.condition = genCondition();
-            return $$Monitor.update({ id: monitor.monitorID }, monitor).$promise;
+            checkStatus();
+            if (monitor.condition) {
+                $$Monitor.update({ id: monitor.monitorID }, monitor).$promise.then(function(res) {
+                    defer.resolve(res);
+                });
+            } else {
+                MonitorService.deleteMonitor().then(function() {
+                    return MonitorService.addMonitor();
+                }).then(function(res) {
+                    monitor = angular.copy(emptyMonitor);
+                    monitor.monitorID = res.monitorID;
+                    defer.resolve(monitor);
+                });
+            }
+            return defer.promise;
         },
-        getNotice: function(queryString, _data) {
-            return $$Notice.query(queryString, _data).$promise;
+        deleteMonitor: function() {
+            return $$Monitor.delete({ id: monitor.monitorID }).$promise;
+        },
+        getNotice: function(queryString) {
+            return $$Notice.query(queryString, { from: monitor.name, actionType: 'true2false' }).$promise;
         },
         count: function() {
             return $$Notice.queryCount({}, { from: monitor.name }).$promise;
@@ -193,4 +229,5 @@ angular.module('SmartPortal.Portal')
             noticeCallback = callback;
         }
     }
+    return MonitorService;
 }]);

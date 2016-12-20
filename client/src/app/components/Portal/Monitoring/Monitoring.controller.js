@@ -4,12 +4,9 @@ angular.module('SmartPortal.Portal')
 
 .controller('MonitoringController', ['$scope', '$uibModal', 'MonitorService', function($scope, $uibModal, MonitorService) {
     MonitorService.getThing().then(function(res) {
-        $scope.thing = res
-        MonitorService.getMonitor();
+        $scope.thing = res;
+        MonitorService.queryMonitor();
     });
-
-    // MonitorService.queryMonitor();
-    // MonitorService.setMonitor();
 
     MonitorService.onThing(function(msg) {
         // console.log(msg);

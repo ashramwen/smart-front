@@ -7,7 +7,7 @@ angular.module('SmartPortal.Portal')
     var data = MonitorService.data();
 
     $scope.status = data.thing.status;
-    $scope.monitor = data.monitor;
+    // $scope.monitor = data.monitor;
 
     $scope.reset = function(status) {
         status.lower = undefined;
