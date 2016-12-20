@@ -8,16 +8,7 @@ angular.module('SmartPortal.Portal')
 
     $scope.current = 1;
     $scope.init = function() {
-        $scope.notices = [];
-        var _pager = ($scope.current - 1) * 10 + 1 + '/10';
-        MonitorService.getNotice({ pager: _pager }, { from: data.monitor.name, actionType: 'false2true' }).then(function(res) {
-            parseAlerts(res);
-        });
-
-        MonitorService.count().then(function(res) {
-            $scope.count = res.recordCount;
-            // $scope.count = 100;
-        });
+        getNotices();
     }
 
     $scope.collapse = function(notice, index) {
@@ -33,6 +24,7 @@ angular.module('SmartPortal.Portal')
 
     $scope.pageChanged = function() {
         console.log('Page changed to: ' + $scope.currentPage);
+        getNotices();
     };
 
     // close
@@ -40,10 +32,22 @@ angular.module('SmartPortal.Portal')
         $uibModalInstance.close();
     }
 
+    function getNotices() {
+        $scope.notices = [];
+        var _pager = ($scope.current - 1) * 10 + '/10';
+        MonitorService.getNotice({ pager: _pager }, { from: data.monitor.name, actionType: 'false2true' }).then(function(res) {
+            parseAlerts(res);
+        });
+
+        MonitorService.count().then(function(res) {
+            $scope.count = res.recordCount;
+            // $scope.count = 100;
+        });
+    }
+
     function parseAlerts(alerts) {
 
         $scope.notices = alerts.map(function(alert) {
-            // notice.monitor
             var monitor = alert.data.monitor;
             var clauses = monitor.condition.clauses;
             var currStatus = alert.data.currStatus;
@@ -53,13 +57,13 @@ angular.module('SmartPortal.Portal')
             for (var key in currStatus) {
                 var clause = clauses.find(function(o) { return o.field === key; });
                 if (!clause) continue;
-                // if (currStatus[key] <= clause.lowerLimit || currStatus[key] >= clause.lowerLimit) {
-                _status.push({
-                    name: key,
-                    display: data.thing.status[key].display,
-                    value: currStatus[key]
-                });
-                // }
+                if (currStatus[key] <= clause.lowerLimit || currStatus[key] >= clause.lowerLimit) {
+                    _status.push({
+                        name: key,
+                        display: data.thing.status[key].display,
+                        value: currStatus[key]
+                    });
+                }
             }
 
             return {
@@ -67,10 +71,12 @@ angular.module('SmartPortal.Portal')
                 status: _status
             }
         });
-        for (var i = 0; i < 10; i++) {
-            $scope.notices.push(angular.copy($scope.notices[0]));
-        }
+
+        // for test
+        // for (var i = 0; i < 10; i++) {
+        //     $scope.notices.push(angular.copy($scope.notices[0]));
+        // }
         // $scope.notices = [angular.copy($scope.notices[0]), $scope.notices[0]];
-        console.log($scope.notices);
+        // console.log($scope.notices);
     }
 }]);
