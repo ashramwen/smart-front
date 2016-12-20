@@ -6,7 +6,7 @@ angular.module('SmartPortal.Portal')
     var data = MonitorService.data();
     var size = 10;
 
-    $scope.current = 1;
+    $scope.currentPage = 1;
     $scope.init = function() {
         getNotices();
     }
@@ -22,7 +22,8 @@ angular.module('SmartPortal.Portal')
         }
     }
 
-    $scope.pageChanged = function() {
+    $scope.pageChanged = function(currentPage) {
+        $scope.currentPage = currentPage;
         console.log('Page changed to: ' + $scope.currentPage);
         getNotices();
     };
@@ -34,7 +35,7 @@ angular.module('SmartPortal.Portal')
 
     function getNotices() {
         $scope.notices = [];
-        var _pager = ($scope.current - 1) * 10 + '/10';
+        var _pager = ($scope.currentPage - 1) * 10 + '/10';
         MonitorService.getNotice({ pager: _pager }).then(function(res) {
             parseAlerts(res);
         });

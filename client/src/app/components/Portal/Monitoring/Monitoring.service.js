@@ -220,7 +220,7 @@ angular.module('SmartPortal.Portal')
             return $$Notice.query(queryString, { from: monitor.name, actionType: 'false2true' }).$promise;
         },
         count: function() {
-            return $$Notice.queryCount({}, { from: monitor.name }).$promise;
+            return $$Notice.queryCount({}, { from: monitor.name, actionType: 'false2true' }).$promise;
         },
         onThing: function(callback) {
             thingCallback = callback;
