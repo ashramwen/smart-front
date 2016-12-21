@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="row card-columns clearfix">
+    <div class="row card-columns clearfix" ng-if="online">
 
       <!-- START card -->
       <div class="card" ng-repeat="s in thing.status track by s.name" ng-class="{'warn': s.warn}">

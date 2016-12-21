@@ -1,53 +1,58 @@
 <div class="app-portal skin-black" id="wrapper" ng-init="portalInit()">
-    <div class="wrapper row-offcanvas row-offcanvas-left">
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="left-side" style="min-height: 100%;">
-            <div class="logo-title">{{'portalNamBref' | translate}}</div>
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="image img-circle">
-                        <img src="images/icon_avatar.png" width="43" height="43" alt="User Image">
-                    </div>
-                    <!--<div class="info"> {{credential.userName}}</div>-->
-                </div>
-                <ul class="sidebar-menu">
-                    <li ng-repeat="nav in portalNavs | orderBy: 'order'" ng-class="{'active':isActive(nav.state.name)}" ng-if="!nav.hidden" >
-                        <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"> {{ 'portalModules.' + nav.name + '.displayName' | translate}}</a>
-                        <ul class="nav nav-second-level" uib-collapse="!isActive(nav.state.name)">
-                            <li ng-repeat="subNav in nav.subViews | orderBy: 'order'" ng-if="!subNav.hidden" ng-class="{'active': isActive(subNav.state.name)}">
-                                <a ui-sref="{{(!subNav.state.abstract? subNav.state.name: subNav.state.redirectTo)}}">{{'portalModules.' + subNav.name + '.displayName' | translate}}</a>
-                                <ul class="nav nav-third-level" uib-collapse="!subNav._active">
-                                    <li ng-if="!thirdNav.hidden" ng-repeat="thirdNav in subNav.subViews | orderBy: '-order'"  ng-class="{'active': isActive(thirdNav.state.name)}">
-                                        <a ui-sref="{{(!thirdNav.state.abstract? thirdNav.state.name: thirdNav.state.redirectTo)}}">{{'portalModules.' + thirdNav.name + '.displayName' | translate}}</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="left-side" style="min-height: 100%;">
+      <div class="logo-title">{{'portalNamBref' | translate}}</div>
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="image img-circle">
+            <img src="images/icon_avatar.png" width="43" height="43" alt="User Image">
+          </div>
+          <!--<div class="info"> {{credential.userName}}</div>-->
+        </div>
+        <ul class="sidebar-menu">
+          <li ng-repeat="nav in portalNavs | orderBy: 'order'" ng-class="{'active':isActive(nav.state.name)}" ng-if="!nav.hidden">
+            <a ui-sref="{{(!nav.state.abstract? nav.state.name: getFirstChild(nav).state.name)}}"> {{ 'portalModules.' + nav.name + '.displayName' | translate}}</a>
+            <ul class="nav nav-second-level" uib-collapse="!isActive(nav.state.name)">
+              <li ng-repeat="subNav in nav.subViews | orderBy: 'order'" ng-if="!subNav.hidden" ng-class="{'active': isActive(subNav.state.name)}">
+                <a ui-sref="{{(!subNav.state.abstract? subNav.state.name: subNav.state.redirectTo)}}">{{'portalModules.' + subNav.name + '.displayName' | translate}}</a>
+                <ul class="nav nav-third-level" uib-collapse="!subNav._active">
+                  <li ng-if="!thirdNav.hidden" ng-repeat="thirdNav in subNav.subViews | orderBy: '-order'" ng-class="{'active': isActive(thirdNav.state.name)}">
+                    <a ui-sref="{{(!thirdNav.state.abstract? thirdNav.state.name: thirdNav.state.redirectTo)}}">{{'portalModules.' + thirdNav.name + '.displayName' | translate}}</a>
+                  </li>
                 </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+              </li>
+            </ul>
+            <!-- /.nav-second-level -->
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
 
-        <!-- Right side column. Contains the navbar and content of the page -->
-        <aside class="right-side shrink">
-            <div class="notice" ng-class="{'active':notice}"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.notice' | translate:{display:notice.display, value:notice.value} }}</div>
-            <!-- Main content -->
-            <section class="content">
-                <div class="row portal-row" ng-if="$state.current.description && $state.current.description!=''")>
-                    <div class="module-description">
-                        {{$state.current.description}}
-                    </div>
-                </div>
-                <div>
-                    <div ui-view class="portal-content-body"></div>
-                </div>
-            </section><!-- /.content -->
-        </aside><!-- /.right-side -->
-    </div>
+    <!-- Right side column. Contains the navbar and content of the page -->
+    <aside class="right-side shrink">
+      <div class="notice">
+        <div ng-if="notice && online"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.notice' | translate:{display:notice.display, value:notice.value} }}</div>
+        <div ng-if="online===false"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.offline' | translate }}</div>
+      </div>
+      <!-- Main content -->
+      <section class="content">
+        <div class="row portal-row" ng-if="$state.current.description && $state.current.description!=''" )>
+          <div class="module-description">
+            {{$state.current.description}}
+          </div>
+        </div>
+        <div>
+          <div ui-view class="portal-content-body"></div>
+        </div>
+      </section>
+      <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+  </div>
 
 </div>
 <!-- /#wrapper -->

@@ -28,6 +28,7 @@
             "history": "Alert History",
             "notice": "The value of {{display}} reached {{value}} !",
             "lowerLimit": "Lower Limit",
+            "offline": "The sensor is offline.",
             "range": "Operating range: {{min}} ~ {{max}}",
             "save": "Save",
             "setalert": "Alert Setting",

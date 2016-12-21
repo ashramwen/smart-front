@@ -480,6 +480,14 @@ angular.module('SmartPortal.Portal')
 
                 return JSON.stringify(request);
             }
+        },
+        checkConnection: {
+            method: 'GET',
+            url: MyAPIs.CLOUD_THING_IF + '/apps/:kiiAppID/things/:gatewayThingID/end-nodes/:gatewayThingID/connection',
+            params: { kiiAppID: '@kiiAppID', gatewayThingID: '@gatewayThingID' },
+            headers: {
+                Authorization: 'Bearer 0ESUYYHxUPA4mgAaWFAM5IKkKeJY5Ekq312533fa0fM'
+            }
         }
     });
 

@@ -2,6 +2,10 @@ angular.module('SmartPortal.Portal')
 
 .factory('MonitorService', ['$rootScope', '$q', 'WebSocketClient', '$$Thing', '$$Monitor', '$$Notice', function($rootScope, $q, WebSocketClient, $$Thing, $$Monitor, $$Notice) {
     var monitorName = 'CP-Demo Monitor';
+    var gatewayInfo = {
+        'kiiAppID': '192b49ce',
+        'gatewayThingID': 'th.f83120e36100-1c9a-6e11-482c-0a825e72'
+    };
     var thing = {
         'id': 7174,
         'createDate': 1481783151000,
@@ -78,7 +82,7 @@ angular.module('SmartPortal.Portal')
 
     function subscribe() {
         WebSocketClient.subscribe(destination, function(msg) {
-            // console.log('websocket:', msg.state);
+            console.log('websocket:', msg.state);
             updateStatus(msg.state);
             checkStatus();
             thingCallback && thingCallback.apply(this, [thing]);
@@ -153,6 +157,14 @@ angular.module('SmartPortal.Portal')
                 thing: thing,
                 monitor: monitor
             };
+        },
+        checkConnection: function() {
+            var defer = $q.defer();
+            $$Thing.checkConnection(gatewayInfo).$promise.then(function(res) {
+                $rootScope.online = res.online;
+                defer.resolve({ online: res.online });
+            });
+            return defer.promise;
         },
         getThing: function() {
             var defer = $q.defer();
