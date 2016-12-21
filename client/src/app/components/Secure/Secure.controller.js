@@ -8,11 +8,13 @@ angular.module('SmartPortal.Secure')
 
         SecurityService.login(credentials).then(function(portalAdmin) {
             SessionService.setPortalAdmin(portalAdmin);
-            $state.go('app.portal.Welcome');
+            // $state.go('app.portal.Welcome');
             AppUtils.hideLoading();
         }, function(error) {
             console.log(error);
             AppUtils.hideLoading();
         });
     };
+
+    $scope.login();
 }]);
