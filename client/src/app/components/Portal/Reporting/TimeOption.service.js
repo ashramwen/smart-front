@@ -56,7 +56,7 @@ angular.module('SmartPortal.Portal')
       }, {
         text: 'Last Week',
         interval: 1,
-        unit: '',
+        unit: 'd',
         style: 'e',
         from: function(){
           var t = new Date;
