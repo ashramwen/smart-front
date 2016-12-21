@@ -1,4 +1,38 @@
 @import 'src/app/components/AppShared/scss/global.scss';
 .app-portal-monitoring-history {
-
+    .notice {
+        overflow: auto;
+        height: 480px;
+        ul {
+            padding: 0;
+            list-style: none;
+            li {
+                min-height: 34px;
+                line-height: 34px;
+                margin-top: 10px;
+                padding: 0 10px;
+                background-color: #f0f8fa;
+            }
+            .collapse-name {
+                padding-left: 10px;
+            }
+        }
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    ul.custom-pagination {
+        padding: 0;
+        color: #57c6e6;
+        list-style: none;
+        height: 29px;
+        li {
+            display: inline;
+            vertical-align: bottom;
+            margin: 0 10px;
+            &.active {
+                font-size: 24px;
+            }
+        }
+    }
 }

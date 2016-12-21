@@ -20,10 +20,15 @@ angular.module('SmartPortal.Secure')
     };
 
     SecurityService.login = function(credentials) {
+        // return $$Auth.login({
+        //     password: '1qaz2wsx',
+        //     permanentToken: true,
+        //     userName: 'beehive_admin'
+        // }).$promise;
         return $$Auth.login({
-            password: '1qaz2wsx',
+            password: '123qwe',
             permanentToken: true,
-            userName: 'beehive_admin'
+            userName: 'cpdemouser'
         }).$promise;
     };
 

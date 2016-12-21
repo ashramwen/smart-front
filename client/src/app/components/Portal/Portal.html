@@ -10,7 +10,7 @@
                     <div class="image img-circle">
                         <img src="images/icon_avatar.png" width="43" height="43" alt="User Image">
                     </div>
-                    <div class="info"> {{credential.userName}}</div>
+                    <!--<div class="info"> {{credential.userName}}</div>-->
                 </div>
                 <ul class="sidebar-menu">
                     <li ng-repeat="nav in portalNavs | orderBy: 'order'" ng-class="{'active':isActive(nav.state.name)}" ng-if="!nav.hidden" >
@@ -34,6 +34,7 @@
 
         <!-- Right side column. Contains the navbar and content of the page -->
         <aside class="right-side shrink">
+            <div class="notice" ng-class="{'active':notice}"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.notice' | translate:{display:notice.display, value:notice.value} }}</div>
             <!-- Main content -->
             <section class="content">
                 <div class="row portal-row" ng-if="$state.current.description && $state.current.description!=''")>

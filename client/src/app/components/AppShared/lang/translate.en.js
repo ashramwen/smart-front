@@ -23,8 +23,10 @@
             "back": "Back"
         },
         "monitoring": {
+            "alerting": "Alerting",
             "alertTime": "Alert Time",
             "history": "Alert History",
+            "notice": "The value of {{display}} reached {{value}} !",
             "lowerLimit": "Lower Limit",
             "range": "Operating range: {{min}} ~ {{max}}",
             "save": "Save",

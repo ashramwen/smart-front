@@ -11,7 +11,7 @@ var util = require('util');
 
 var proxyMiddleware = require('http-proxy-middleware');
 
-var LOCAL_PORT = 8000;
+var LOCAL_PORT = 8001;
 
 function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;

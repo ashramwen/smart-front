@@ -36,4 +36,4 @@ bower install
 gulp
 ```
 
-Now, all good! You should be able to visible this site through [http://localhost:8000](http://localhost:8000)
+Now, all good! You should be able to visible this site through [http://localhost:8001](http://localhost:8001)
