@@ -37,8 +37,8 @@
             "title": "监控状态",
             "upperLimit": "Upper Limit"
         },
-        "portalName": "CP-Demo",
-        "portalNamBref": "CP-Demo",
+        "portalName": "Environmental Sensor Demo",
+        "portalNamBref": "Environmental Sensor Demo",
         "portalModules": {
             "welcome": {
                 "displayName": "欢迎",
