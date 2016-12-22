@@ -147,7 +147,7 @@
         .modal-header {
             position: relative;
             color: #fff;
-            top: -26px;
+            top: -29px;
             text-align: center;
             border: none;
             &::before {
@@ -157,24 +157,28 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                width: 467px;
-                height: 29px;
+                width: 447px;
+                height: 0;
                 margin: 0 auto;
-                background-color: #00a1cf;
-                transform: perspective(467px) rotateX(40deg);
+                border-bottom: 29px solid #00a1cf;
+                border-left: 7px solid transparent;
+                border-right: 7px solid transparent;
             }
             &::after {
                 content: ' ';
                 position: absolute;
                 display: block;
-                top: 2px;
+                top: 0;
                 left: 0;
                 right: 0;
-                width: 445px;
-                height: 69px;
+                width: 433px;
+                height: 0;
                 margin: 0 auto;
-                background-color: #57c6e6;
-                transform: perspective(445px) rotateX(-20deg);
+                // background-color: #57c6e6;
+                // transform: perspective(445px) rotateX(-20deg);
+                border-top: 69px solid #57c6e6;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
             }
             >h3 {
                 position: absolute;
