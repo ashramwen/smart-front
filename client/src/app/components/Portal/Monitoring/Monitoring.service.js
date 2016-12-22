@@ -139,11 +139,11 @@ angular.module('SmartPortal.Portal')
     // show/hide notice on the top of portal
     function checkStatus() {
         var status;
-        $rootScope.notice = undefined;
+        $rootScope.notice = [];
         for (var key in thing.status) {
             status = thing.status[key];
             status.warn = (status.value >= status.lower || status.value <= status.upper);
-            status.warn && ($rootScope.notice = status);
+            status.warn && ($rootScope.notice.push(status));
         }
     }
 
