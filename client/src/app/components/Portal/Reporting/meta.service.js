@@ -3,7 +3,7 @@ window.chartsMeta = [
   {
     "dataset": {
       "complex": false,
-      "name": "CO & CO2 (ml/m³)",
+      "name": "CO & CO2 (mg/m³)",
       "currentMethod": "avg",
       "methods": [
         {
@@ -236,7 +236,7 @@ window.chartsMeta = [
   {
     "dataset": {
       "complex": false,
-      "name": "PM 10 & PM2.5 (ml/m³)",
+      "name": "PM 10 & PM2.5 (mg/m³)",
       "currentMethod": "avg",
       "methods": [
         {
@@ -467,7 +467,7 @@ window.chartsMeta = [
   {
     "dataset": {
       "complex": false,
-      "name": "CO2 Against Temperature (ml/m³)",
+      "name": "CO2 Against Temperature (mg/m³)",
       "options": {
         "level": 0,
         "query": {
@@ -537,7 +537,7 @@ window.chartsMeta = [
   {
     "dataset": {
       "complex": false,
-      "name": "CO2 Density (ml/m³)",
+      "name": "CO2 Density (mg/m³)",
       "options": {
         "level": 0,
         "query": {
