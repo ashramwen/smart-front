@@ -2567,7 +2567,7 @@ webpackJsonp([1,2],{
 	    exports.defaultMetricParser(metric, context);
 	};
 	exports.defaultMetricParser = function (metric, context) {
-	    context.doc[metric.fieldName] = parseFloat(Number.prototype.toFixed.call(context.doc[metric.fieldName], 3));
+	    context.doc[metric.fieldName] = parseFloat(Number.prototype.toFixed.call(context.doc[metric.fieldName], 1));
 	};
 	exports.KiiMetricParsers = {
 	    'script': exports.scriptMetricParser,
