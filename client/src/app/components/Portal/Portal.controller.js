@@ -45,4 +45,8 @@ angular.module('SmartPortal.Portal')
     };
 
     $scope.isCreator = ownership.isCreator;
+
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $scope.isMonitor = $state.is('app.portal.Monitoring');
+    });
 }]);

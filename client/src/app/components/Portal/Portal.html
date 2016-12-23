@@ -34,7 +34,7 @@
 
     <!-- Right side column. Contains the navbar and content of the page -->
     <aside class="right-side shrink">
-      <div class="notice">
+      <div class="notice" ng-if="isMonitor">
         <vertical-carousel items="notice" ng-if="online"></vertical-carousel>
         <div ng-if="online===false"><b>{{'monitoring.alerting' | translate}}:</b> {{'monitoring.offline' | translate }}</div>
       </div>

@@ -25,13 +25,20 @@ angular.module('SmartPortal.AppShared')
                 }, 600);
             }
             var timer = null;
-            scope.$watch('items', function(newValue, oldValue) {
+            var watcher = scope.$watch('items', function(newValue, oldValue) {
                 if (!newValue || newValue.length <= 1) {
                     $interval.cancel(timer);
                     timer = null;
                 } else if (timer === null) {
                     timer = $interval(moving, interval);
                 }
+            });
+            scope.$on('$destroy', function() {
+                if (timer) {
+                    $interval.cancel(timer);
+                    timer = null;
+                }
+                watcher();
             });
         }
     }
