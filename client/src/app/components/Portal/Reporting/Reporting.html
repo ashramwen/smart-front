@@ -2,7 +2,7 @@
   <div class="reporting-header">
     <div class="reporting-option" ng-click="selectOption(option)" ng-class="{[option.style]: true, 'active': option === selectedOption}" ng-repeat="option in options">{{option.text}}</div>
   </div>
-  <div gridster="gridsterOpts">
+  <div gridster="gridsterOpts" class="charts">
     <div ng-repeat="chart in charts | filter: displayTagFilter" gridster-item="customChartMap">
       <div class="panel">
         <div class="panel-body">
